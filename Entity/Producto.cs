@@ -8,6 +8,6 @@ namespace Entity
 {
     public class Producto
     {
-        // ests es la clase Pruducto del proyecto Pizzeria
+        
     }
 }
