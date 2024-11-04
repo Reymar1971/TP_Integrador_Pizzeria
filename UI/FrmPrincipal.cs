@@ -21,29 +21,42 @@ namespace UI
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BDConexion"].ConnectionString);
-
-            using (connection)
-            {
-                try
-                {
-                    connection.Open();
-                    MessageBox.Show("Conexión exitosa!");
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al conectar: " + ex.Message);
-                }
-            }
-
-        }
-
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void pedidosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPedido frmPedido = new FrmPedido();
+            frmPedido.MdiParent = this;
+            frmPedido.Show();
+        }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCliente frmCliente = new FrmCliente();
+            frmCliente.MdiParent = this;
+            frmCliente.Show();
+        }
+
+        private void categiriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCategoria frmCategoria = new FrmCategoria();
+            frmCategoria.MdiParent = this;
+            frmCategoria.Show();
+        }
+
+        private void productosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProducto frmProducto = new FrmProducto();
+            frmProducto.MdiParent = this;
+            frmProducto.Show();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
