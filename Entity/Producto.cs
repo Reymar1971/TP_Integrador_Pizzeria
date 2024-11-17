@@ -14,7 +14,7 @@ namespace Entity
         private decimal precioVenta;
         private int stock;
         private Boolean estado;
-        private TipoCategoria tipoCategoria;
+        private Categoria tipoCategoria;
         
 
         public int IdProducto { get => idProducto; set => idProducto = value; }
@@ -23,6 +23,6 @@ namespace Entity
         public decimal PrecioVenta { get => precioVenta; set => precioVenta = value; }
         public int Stock { get => stock; set => stock = value; }
         public bool Estado { get => estado; set => estado = value; }
-        public TipoCategoria TipoCategoria { get => tipoCategoria; set => tipoCategoria = value; }
+        public Categoria TipoCategoria { get => tipoCategoria; set => tipoCategoria = value; }
     }
 }
