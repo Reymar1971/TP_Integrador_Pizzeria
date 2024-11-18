@@ -74,7 +74,9 @@ namespace UI
         {
             TxtNombre.Clear();
             TxtDescripcion.Clear();
+            TxtId.Clear();
             BtnIngresar.Visible = true;
+            BtnCargar.Visible = true;
             BtnActualizar.Visible = false;
 
             DgvListado.Columns[0].Visible = false;
@@ -98,6 +100,7 @@ namespace UI
                 BtnActualizar.Visible = true;
                 BtnIngresar.Visible = false;
                 BtnConfirmar.Visible = false;
+                BtnCargar.Visible = false;
                 TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["IdCategoria"].Value);
                 TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
                 TxtDescripcion.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Descripcion"].Value);
@@ -135,5 +138,194 @@ namespace UI
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void BtnIngresar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Categoria categoria = new Categoria();
+                categoria.Nombre = TxtNombre.Text;
+                categoria.Descripcion = TxtDescripcion.Text;
+                borradorCategoria.Add(categoria);
+
+                MessageBox.Show("Categoria cargada en la Lista");
+                this.Listar();
+                TxtDescripcion.Clear();
+                TxtNombre.Clear();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnConfirmar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (borradorCategoria.Count == 0)
+                {
+                    throw new Exception("La Lista esta vacia!!");
+                }
+                categoriaBusiness.CargaVarios(borradorCategoria);
+                MessageBox.Show("Categorias confirmadas correctamente");
+                borradorCategoria = new List<Categoria>();
+                this.Listar();
+                TabGeneral.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            borradorCategoria = new List<Categoria>();
+        }
+
+        private void BtnCargar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Categoria categoria = new Categoria();
+                categoria.Nombre = TxtNombre.Text;
+                categoria.Descripcion = TxtDescripcion.Text;
+                categoriaBusiness.Carga(categoria);
+                MessageBox.Show("Categoria cargada correctamente");
+                this.Listar();
+                TxtDescripcion.Clear();
+                TxtNombre.Clear();
+                TabGeneral.SelectedIndex = 0;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
+            BtnConfirmar.Visible = true;
+            BtnCargar.Visible = true;
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas eliminar el(los) registro(s)?", "Gestion Pizzeria", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+
+                    foreach (DataGridViewRow row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            categoriaBusiness.Eliminar(Codigo);
+                            MessageBox.Show("Se elimino el registro: " + Convert.ToString(row.Cells[2].Value));
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas Activar el(los) registro(s)?", "Gestion Pizzeria", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+
+                    foreach (DataGridViewRow row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            categoriaBusiness.Activar(Codigo);
+                            MessageBox.Show("Se Activó el registro: " + Convert.ToString(row.Cells[2].Value));
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnDesactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas Desactivar el(los) registro(s)?", "Gestion Pizzeria", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+
+                    foreach (DataGridViewRow row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            categoriaBusiness.Desactivar(Codigo);
+                            MessageBox.Show("Se Desactivó el registro: " + Convert.ToString(row.Cells[2].Value));
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            this.Buscar();
+        }
+
+        private void BtnCancelaBuscar_Click(object sender, EventArgs e)
+        {
+            this.Listar();
+            TxtBuscar.Text = null;
+        }
+
+        private void ChkSeleccionar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChkSeleccionar.Checked)
+            {
+                DgvListado.Columns[0].Visible = true;
+                BtnActivar.Visible = true;
+                BtnDesactivar.Visible = true;
+                BtnEliminar.Visible = true;
+            }
+            else
+            {
+                DgvListado.Columns[0].Visible = false;
+                BtnActivar.Visible = false;
+                BtnDesactivar.Visible = false;
+                BtnEliminar.Visible = false;
+            }
+        }
+
+        
     }
 }

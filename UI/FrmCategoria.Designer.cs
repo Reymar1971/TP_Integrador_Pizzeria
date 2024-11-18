@@ -31,6 +31,7 @@
             BtnConfirmar = new Button();
             BtnActualizar = new Button();
             tabPage2 = new TabPage();
+            BtnCargar = new Button();
             TxtDescripcion = new TextBox();
             TxtId = new TextBox();
             TxtNombre = new TextBox();
@@ -58,16 +59,17 @@
             // 
             // BtnConfirmar
             // 
-            BtnConfirmar.Location = new Point(373, 244);
+            BtnConfirmar.Location = new Point(291, 245);
             BtnConfirmar.Name = "BtnConfirmar";
             BtnConfirmar.Size = new Size(75, 23);
             BtnConfirmar.TabIndex = 10;
             BtnConfirmar.Text = "Confirmar";
             BtnConfirmar.UseVisualStyleBackColor = true;
+            BtnConfirmar.Click += BtnConfirmar_Click;
             // 
             // BtnActualizar
             // 
-            BtnActualizar.Location = new Point(229, 244);
+            BtnActualizar.Location = new Point(169, 245);
             BtnActualizar.Name = "BtnActualizar";
             BtnActualizar.Size = new Size(75, 23);
             BtnActualizar.TabIndex = 8;
@@ -77,6 +79,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(BtnCargar);
             tabPage2.Controls.Add(TxtDescripcion);
             tabPage2.Controls.Add(BtnConfirmar);
             tabPage2.Controls.Add(TxtId);
@@ -93,6 +96,16 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Mantenimiento";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // BtnCargar
+            // 
+            BtnCargar.Location = new Point(412, 245);
+            BtnCargar.Name = "BtnCargar";
+            BtnCargar.Size = new Size(75, 23);
+            BtnCargar.TabIndex = 12;
+            BtnCargar.Text = "Cargar";
+            BtnCargar.UseVisualStyleBackColor = true;
+            BtnCargar.Click += BtnCargar_Click;
             // 
             // TxtDescripcion
             // 
@@ -118,12 +131,13 @@
             // 
             // BtnCancelar
             // 
-            BtnCancelar.Location = new Point(495, 244);
+            BtnCancelar.Location = new Point(528, 245);
             BtnCancelar.Name = "BtnCancelar";
             BtnCancelar.Size = new Size(75, 23);
             BtnCancelar.TabIndex = 7;
             BtnCancelar.Text = "Cancelar";
             BtnCancelar.UseVisualStyleBackColor = true;
+            BtnCancelar.Click += BtnCancelar_Click;
             // 
             // label1
             // 
@@ -136,12 +150,13 @@
             // 
             // BtnIngresar
             // 
-            BtnIngresar.Location = new Point(229, 244);
+            BtnIngresar.Location = new Point(169, 245);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(75, 23);
             BtnIngresar.TabIndex = 6;
             BtnIngresar.Text = "Ingresar";
             BtnIngresar.UseVisualStyleBackColor = true;
+            BtnIngresar.Click += BtnIngresar_Click;
             // 
             // label2
             // 
@@ -166,6 +181,7 @@
             BtnCancelaBuscar.TabIndex = 12;
             BtnCancelaBuscar.Text = "Cancela Busqueda";
             BtnCancelaBuscar.UseVisualStyleBackColor = true;
+            BtnCancelaBuscar.Click += BtnCancelaBuscar_Click;
             // 
             // tabPage1
             // 
@@ -194,26 +210,27 @@
             BtnEliminar.TabIndex = 11;
             BtnEliminar.Text = "Eliminar";
             BtnEliminar.UseVisualStyleBackColor = true;
+            BtnEliminar.Click += BtnEliminar_Click;
             // 
             // BtnDesactivar
             // 
-            BtnDesactivar.Enabled = false;
             BtnDesactivar.Location = new Point(257, 386);
             BtnDesactivar.Name = "BtnDesactivar";
             BtnDesactivar.Size = new Size(75, 23);
             BtnDesactivar.TabIndex = 10;
             BtnDesactivar.Text = "Desactivar";
             BtnDesactivar.UseVisualStyleBackColor = true;
+            BtnDesactivar.Click += BtnDesactivar_Click;
             // 
             // BtnActivar
             // 
-            BtnActivar.Enabled = false;
             BtnActivar.Location = new Point(144, 385);
             BtnActivar.Name = "BtnActivar";
             BtnActivar.Size = new Size(75, 23);
             BtnActivar.TabIndex = 9;
             BtnActivar.Text = "Activar";
             BtnActivar.UseVisualStyleBackColor = true;
+            BtnActivar.Click += BtnActivar_Click;
             // 
             // ChkSeleccionar
             // 
@@ -224,6 +241,7 @@
             ChkSeleccionar.TabIndex = 8;
             ChkSeleccionar.Text = "Seleccionar";
             ChkSeleccionar.UseVisualStyleBackColor = true;
+            ChkSeleccionar.CheckedChanged += ChkSeleccionar_CheckedChanged;
             // 
             // BtnBuscar
             // 
@@ -233,6 +251,7 @@
             BtnBuscar.TabIndex = 7;
             BtnBuscar.Text = "Buscar";
             BtnBuscar.UseVisualStyleBackColor = true;
+            BtnBuscar.Click += BtnBuscar_Click;
             // 
             // TxtBuscar
             // 
@@ -316,5 +335,6 @@
         private DataGridView DgvListado;
         private TabControl TabGeneral;
         private TextBox TxtDescripcion;
+        private Button BtnCargar;
     }
 }

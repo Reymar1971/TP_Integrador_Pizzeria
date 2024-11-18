@@ -20,7 +20,7 @@ namespace BLL
                 {
                     if (categoria.Nombre.Length == 0)
                     {
-                        throw new Exception("Falta ingresar Nombre del Manu");
+                        throw new Exception("Falta ingresar Nombre");
                     }
                     if (categoria.Descripcion.Length == 0)
                     {
@@ -65,7 +65,7 @@ namespace BLL
             {
                 if (nombre.Length == 0)
                 {
-                    throw new Exception("Falta ingresar Nombre del Manu");
+                    throw new Exception("Falta ingresar Nombre");
                 }
                 if (descripcion.Length == 0)
                 {
@@ -79,19 +79,7 @@ namespace BLL
                 throw;
             }
         }
-
-        public List<Categoria> Buscar(string text)
-        {
-            try
-            {
-                return CategoriaDao.Buscar(text);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
+                
         public void Eliminar(int codigo)
         {
             try
@@ -113,6 +101,44 @@ namespace BLL
             }
             catch (Exception ex)
             {
+                throw;
+            }
+        }
+
+        public List<Categoria> Buscar(string text)
+        {
+            try
+            {
+                return CategoriaDao.Buscar(text);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public void Activar(int codigo)
+        {
+            try
+            {
+                categoriaDao.Activar(codigo);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void Desactivar(int codigo)
+        {
+            try
+            {
+                categoriaDao.Desactivar(codigo);
+            }
+            catch (Exception ex)
+            {
+
                 throw;
             }
         }
