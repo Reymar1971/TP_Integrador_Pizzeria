@@ -270,6 +270,7 @@ namespace UI
             TxtBuscar.Text = null;
         }
 
+        // Los metodos de Activa y Desactiva se de dejan por alguna implementacion futura 
         private void BtnActivar_Click(object sender, EventArgs e)
         {
             try

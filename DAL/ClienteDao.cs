@@ -144,6 +144,7 @@ namespace DAL
             }
         }
 
+        // Los metodos de Activa y Desactiva se de dejan por alguna implementacion futura 
         public void Activar(int codigo)
         {
             SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());

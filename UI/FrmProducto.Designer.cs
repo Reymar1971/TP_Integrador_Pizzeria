@@ -30,6 +30,10 @@
         {
             label3 = new Label();
             tabPage2 = new TabPage();
+            CmbCategoria = new ComboBox();
+            label5 = new Label();
+            TxtCodigo = new TextBox();
+            label4 = new Label();
             TxtStock = new TextBox();
             BtnCargar = new Button();
             TxtPrecioVenta = new TextBox();
@@ -53,10 +57,6 @@
             DgvListado = new DataGridView();
             Seleccionar = new DataGridViewCheckBoxColumn();
             TabGeneral = new TabControl();
-            label4 = new Label();
-            TxtCodigo = new TextBox();
-            label5 = new Label();
-            CmbCategoria = new ComboBox();
             tabPage2.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvListado).BeginInit();
@@ -97,6 +97,39 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Mantenimiento";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // CmbCategoria
+            // 
+            CmbCategoria.FormattingEnabled = true;
+            CmbCategoria.Location = new Point(142, 196);
+            CmbCategoria.Name = "CmbCategoria";
+            CmbCategoria.Size = new Size(200, 23);
+            CmbCategoria.TabIndex = 18;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(27, 202);
+            label5.Name = "label5";
+            label5.Size = new Size(61, 15);
+            label5.TabIndex = 17;
+            label5.Text = "Categoría:";
+            // 
+            // TxtCodigo
+            // 
+            TxtCodigo.Location = new Point(142, 23);
+            TxtCodigo.Name = "TxtCodigo";
+            TxtCodigo.Size = new Size(200, 23);
+            TxtCodigo.TabIndex = 16;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(27, 73);
+            label4.Name = "label4";
+            label4.Size = new Size(54, 15);
+            label4.TabIndex = 15;
+            label4.Text = "Nombre:";
             // 
             // TxtStock
             // 
@@ -263,6 +296,7 @@
             ChkSeleccionar.TabIndex = 8;
             ChkSeleccionar.Text = "Seleccionar";
             ChkSeleccionar.UseVisualStyleBackColor = true;
+            ChkSeleccionar.CheckedChanged += ChkSeleccionar_CheckedChanged;
             // 
             // BtnBuscar
             // 
@@ -291,6 +325,8 @@
             DgvListado.ReadOnly = true;
             DgvListado.Size = new Size(721, 316);
             DgvListado.TabIndex = 4;
+            DgvListado.CellContentClick += DgvListado_CellContentClick;
+            DgvListado.CellContentDoubleClick += DgvListado_CellContentDoubleClick;
             // 
             // Seleccionar
             // 
@@ -307,39 +343,6 @@
             TabGeneral.SelectedIndex = 0;
             TabGeneral.Size = new Size(800, 465);
             TabGeneral.TabIndex = 11;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(27, 73);
-            label4.Name = "label4";
-            label4.Size = new Size(54, 15);
-            label4.TabIndex = 15;
-            label4.Text = "Nombre:";
-            // 
-            // TxtCodigo
-            // 
-            TxtCodigo.Location = new Point(142, 23);
-            TxtCodigo.Name = "TxtCodigo";
-            TxtCodigo.Size = new Size(200, 23);
-            TxtCodigo.TabIndex = 16;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(27, 202);
-            label5.Name = "label5";
-            label5.Size = new Size(61, 15);
-            label5.TabIndex = 17;
-            label5.Text = "Categoría:";
-            // 
-            // CmbCategoria
-            // 
-            CmbCategoria.FormattingEnabled = true;
-            CmbCategoria.Location = new Point(142, 196);
-            CmbCategoria.Name = "CmbCategoria";
-            CmbCategoria.Size = new Size(200, 23);
-            CmbCategoria.TabIndex = 18;
             // 
             // FrmProducto
             // 

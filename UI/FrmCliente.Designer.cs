@@ -70,6 +70,7 @@
             DgvListado.ReadOnly = true;
             DgvListado.Size = new Size(721, 316);
             DgvListado.TabIndex = 4;
+            DgvListado.CellContentDoubleClick += DgvListado_CellContentDoubleClick;
             // 
             // Seleccionar
             // 

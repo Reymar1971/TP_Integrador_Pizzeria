@@ -15,12 +15,31 @@ namespace UI
     public partial class FrmProducto : Form
     {
         private ProductoBusiness productoBusiness = new ProductoBusiness();
+        private CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
         private List<Producto> borradorProducto = new List<Producto>();
 
         public FrmProducto()
         {
             InitializeComponent();
         }
+
+        private void CargoCombo()
+        {
+            try
+            {
+                CmbCategoria.DataSource = null;
+                CmbCategoria.DataSource = categoriaBusiness.Listar();
+                CmbCategoria.ValueMember = "IdCategoria";
+                CmbCategoria.DisplayMember = "Nombre";
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void Listar()
         {
             try
@@ -91,9 +110,70 @@ namespace UI
             BtnEliminar.Visible = false;
             ChkSeleccionar.Checked = false;
         }
+
         private void FrmProducto_Load(object sender, EventArgs e)
         {
             Listar();
+            CargoCombo();
+        }
+
+        private void DgvListado_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                this.Limpiar();
+                BtnActualizar.Visible = true;
+                BtnIngresar.Visible = false;
+                BtnConfirmar.Visible = false;
+                BtnCargar.Visible = false;
+                TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["IdProducto"].Value);
+                TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+                TxtCodigo.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Codigo"].Value);
+                TxtPrecioVenta.Text = Convert.ToString(DgvListado.CurrentRow.Cells["PrecioVenta"].Value);
+                TxtStock.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Stock"].Value);
+
+                string categoriaSeleccionada = DgvListado.CurrentRow.Cells[8].Value.ToString();
+
+                // Establecer el DataSource del ComboBox con todas las categorías
+                CargoCombo();
+
+                // Seleccionar la categoría correspondiente al producto
+                CmbCategoria.SelectedItem = categoriaSeleccionada;
+
+                TabGeneral.SelectedIndex = 1;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Seleccione desde la celda nombre");
+            }
+        }
+
+        private void DgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == DgvListado.Columns["Seleccionar"].Index)
+            {
+                DataGridViewCheckBoxCell chkEliminar = (DataGridViewCheckBoxCell)DgvListado.Rows[e.RowIndex].Cells["Seleccionar"];
+                chkEliminar.Value = !Convert.ToBoolean(chkEliminar.Value);
+            }
+        }
+
+        private void ChkSeleccionar_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (ChkSeleccionar.Checked)
+            {
+                DgvListado.Columns[0].Visible = true;
+                BtnActivar.Visible = true;
+                BtnDesactivar.Visible = true;
+                BtnEliminar.Visible = true;
+            }
+            else
+            {
+                DgvListado.Columns[0].Visible = false;
+                BtnActivar.Visible = false;
+                BtnDesactivar.Visible = false;
+                BtnEliminar.Visible = false;
+            }
         }
     }
 }
