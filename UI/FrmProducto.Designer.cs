@@ -146,6 +146,7 @@
             BtnCargar.TabIndex = 12;
             BtnCargar.Text = "Cargar";
             BtnCargar.UseVisualStyleBackColor = true;
+            BtnCargar.Click += BtnCargar_Click;
             // 
             // TxtPrecioVenta
             // 
@@ -162,6 +163,7 @@
             BtnConfirmar.TabIndex = 10;
             BtnConfirmar.Text = "Confirmar";
             BtnConfirmar.UseVisualStyleBackColor = true;
+            BtnConfirmar.Click += BtnConfirmar_Click;
             // 
             // TxtId
             // 
@@ -179,6 +181,7 @@
             BtnActualizar.TabIndex = 8;
             BtnActualizar.Text = "Actualizar";
             BtnActualizar.UseVisualStyleBackColor = true;
+            BtnActualizar.Click += BtnActualizar_Click;
             // 
             // TxtNombre
             // 
@@ -195,6 +198,7 @@
             BtnCancelar.TabIndex = 7;
             BtnCancelar.Text = "Cancelar";
             BtnCancelar.UseVisualStyleBackColor = true;
+            BtnCancelar.Click += BtnCancelar_Click;
             // 
             // label1
             // 
@@ -213,6 +217,7 @@
             BtnIngresar.TabIndex = 6;
             BtnIngresar.Text = "Ingresar";
             BtnIngresar.UseVisualStyleBackColor = true;
+            BtnIngresar.Click += BtnIngresar_Click;
             // 
             // label2
             // 
@@ -240,6 +245,7 @@
             BtnEliminar.TabIndex = 11;
             BtnEliminar.Text = "Eliminar";
             BtnEliminar.UseVisualStyleBackColor = true;
+            BtnEliminar.Click += BtnEliminar_Click;
             // 
             // BtnCancelaBuscar
             // 
@@ -249,6 +255,7 @@
             BtnCancelaBuscar.TabIndex = 12;
             BtnCancelaBuscar.Text = "Cancela Busqueda";
             BtnCancelaBuscar.UseVisualStyleBackColor = true;
+            BtnCancelaBuscar.Click += BtnCancelaBuscar_Click;
             // 
             // tabPage1
             // 
@@ -277,6 +284,7 @@
             BtnDesactivar.TabIndex = 10;
             BtnDesactivar.Text = "Desactivar";
             BtnDesactivar.UseVisualStyleBackColor = true;
+            BtnDesactivar.Click += BtnDesactivar_Click;
             // 
             // BtnActivar
             // 
@@ -286,6 +294,7 @@
             BtnActivar.TabIndex = 9;
             BtnActivar.Text = "Activar";
             BtnActivar.UseVisualStyleBackColor = true;
+            BtnActivar.Click += BtnActivar_Click;
             // 
             // ChkSeleccionar
             // 
@@ -306,6 +315,7 @@
             BtnBuscar.TabIndex = 7;
             BtnBuscar.Text = "Buscar";
             BtnBuscar.UseVisualStyleBackColor = true;
+            BtnBuscar.Click += BtnBuscar_Click;
             // 
             // TxtBuscar
             // 

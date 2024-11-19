@@ -131,15 +131,15 @@ namespace UI
                 TxtCodigo.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Codigo"].Value);
                 TxtPrecioVenta.Text = Convert.ToString(DgvListado.CurrentRow.Cells["PrecioVenta"].Value);
                 TxtStock.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Stock"].Value);
-
-                string categoriaSeleccionada = DgvListado.CurrentRow.Cells[8].Value.ToString();
-
-                // Establecer el DataSource del ComboBox con todas las categorías
                 CargoCombo();
+                if (DgvListado.CurrentRow != null)
+                {
+                    // Obtener el producto seleccionado
+                    Producto productoSeleccionado = (Producto)DgvListado.CurrentRow.DataBoundItem;
 
-                // Seleccionar la categoría correspondiente al producto
-                CmbCategoria.SelectedItem = categoriaSeleccionada;
-
+                    // Seleccionar la categoría del producto en el ComboBox
+                    CmbCategoria.SelectedValue = productoSeleccionado.TipoCategoria.IdCategoria;
+                }
                 TabGeneral.SelectedIndex = 1;
             }
             catch (Exception)
@@ -173,6 +173,205 @@ namespace UI
                 BtnActivar.Visible = false;
                 BtnDesactivar.Visible = false;
                 BtnEliminar.Visible = false;
+            }
+        }
+
+        private void BtnIngresar_Click(object sender, EventArgs e)
+
+        {
+            try
+            {
+                Producto producto = new Producto();
+                producto.Codigo = TxtCodigo.Text;
+                producto.Nombre = TxtNombre.Text;
+                producto.PrecioVenta = Convert.ToDecimal(TxtPrecioVenta.Text);
+                producto.Stock = Convert.ToInt32(TxtStock.Text);
+                producto.TipoCategoria = new Categoria();
+                producto.TipoCategoria.IdCategoria = Convert.ToInt32(CmbCategoria.SelectedValue);
+                borradorProducto.Add(producto);
+
+                MessageBox.Show("Producto cargado en la Lista");
+                this.Listar();
+                TxtCodigo.Clear();
+                TxtNombre.Clear();
+                TxtPrecioVenta.Clear();
+                TxtStock.Clear();
+                CmbCategoria.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnConfirmar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (borradorProducto.Count == 0)
+                {
+                    throw new Exception("La Lista esta vacia!!");
+                }
+                productoBusiness.CargaVarios(borradorProducto);
+                MessageBox.Show("Productos confirmados correctamente");
+                borradorProducto = new List<Producto>();
+                this.Listar();
+                TabGeneral.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            borradorProducto = new List<Producto>();
+        }
+
+        private void BtnCargar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Producto producto = new Producto();
+                producto.Codigo = TxtCodigo.Text;
+                producto.Nombre = TxtNombre.Text;
+                producto.PrecioVenta = Convert.ToDecimal(TxtPrecioVenta.Text);
+                producto.Stock = Convert.ToInt32(TxtStock.Text);
+                producto.TipoCategoria.IdCategoria = Convert.ToInt32(CmbCategoria.SelectedValue);
+                productoBusiness.Carga(producto);
+                MessageBox.Show("Producto cargado correctamente");
+                this.Listar();
+                TxtCodigo.Clear();
+                TxtNombre.Clear();
+                TxtPrecioVenta.Clear();
+                TxtStock.Clear();
+                CmbCategoria.SelectedIndex = -1;
+                TabGeneral.SelectedIndex = 0;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnActualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                productoBusiness.Actualizar(Convert.ToInt32(TxtId.Text), TxtCodigo.Text, TxtNombre.Text, Convert.ToDecimal(TxtPrecioVenta.Text), Convert.ToInt32(TxtStock.Text), Convert.ToInt32(CmbCategoria.SelectedValue));
+                this.Listar();
+                MessageBox.Show("El Producto se actualizó de forma correta");
+                this.Limpiar();
+                TabGeneral.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
+            BtnConfirmar.Visible = true;
+            BtnCargar.Visible = true;
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas eliminar el(los) registro(s)?", "Gestion Pizzeria", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+
+                    foreach (DataGridViewRow row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            productoBusiness.Eliminar(Codigo);
+                            MessageBox.Show("Se elimino el registro: " + Convert.ToString(row.Cells[2].Value));
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            this.Buscar();
+        }
+
+        private void BtnCancelaBuscar_Click(object sender, EventArgs e)
+        {
+            this.Listar();
+            TxtBuscar.Text = null;
+        }
+
+        private void BtnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas Activar el(los) registro(s)?", "Gestion Pizzeria", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+
+                    foreach (DataGridViewRow row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            productoBusiness.Activar(Codigo);
+                            MessageBox.Show("Se Activó el registro: " + Convert.ToString(row.Cells[2].Value));
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnDesactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas Desactivar el(los) registro(s)?", "Gestion Pizzeria", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+
+                    foreach (DataGridViewRow row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            productoBusiness.Desactivar(Codigo);
+                            MessageBox.Show("Se Desactivó el registro: " + Convert.ToString(row.Cells[2].Value));
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
             }
         }
     }

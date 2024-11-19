@@ -26,7 +26,7 @@ namespace BLL
                     {
                         throw new Exception("Falta ingresar Código");
                     }
-                    if (producto.Stock > 0)
+                    if (producto.Stock < 0)
                     {
                         throw new Exception("El Stock no puede ser menor que cero");
                     }
@@ -34,7 +34,7 @@ namespace BLL
                     {
                         throw new Exception("Precio de venta incorrecto");
                     }
-                    if (producto.TipoCategoria.IdCategoria >=0)
+                    if (producto.TipoCategoria.IdCategoria <=0)
                     {
                         throw new Exception("Falta ingresar Categoría");
                     }
@@ -82,7 +82,7 @@ namespace BLL
                 {
                     throw new Exception("Falta ingresar Código");
                 }
-                if (stock > 0)
+                if (stock < 0)
                 {
                     throw new Exception("El Stock no puede ser menor que cero");
                 }
@@ -90,7 +90,7 @@ namespace BLL
                 {
                     throw new Exception("Precio de venta incorrecto");
                 }
-                if (tipoCategoria >= 0)
+                if (tipoCategoria <= 0)
                 {
                     throw new Exception("Falta ingresar Categoría");
                 }
