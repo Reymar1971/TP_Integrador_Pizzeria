@@ -144,6 +144,35 @@ namespace DAL
             }
         }
 
+        public Categoria GetById(int id)
+        {
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(BDConfiguracion.getConectionBD()))
+                {
+                    conection.Open();
+                    string query = "Select ID_CATEGORIA,NOMBRE,DESCRIPCION,ESTADO FROM Categoria WHERE ID_CATEGORIA = @ID";
+                    using (SqlCommand sqlCommand = new SqlCommand(query, conection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@ID", id);
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                return CategoriaMapper.Map(reader);
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
         public void Activar(int codigo)
         {
             SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());

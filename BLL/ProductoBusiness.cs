@@ -94,7 +94,7 @@ namespace BLL
                 {
                     throw new Exception("Falta ingresar Categoría");
                 }
-                productoDao.Actualizar(id, codigo, nombre, precioVenta, stock, tipoCategoria);
+                productoDao.Actualizar(id, tipoCategoria, codigo, nombre, precioVenta, stock);
             }
             catch (Exception ex)
             {

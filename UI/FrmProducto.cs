@@ -42,18 +42,19 @@ namespace UI
         {
             DgvListado.Columns[0].Visible = false;
             DgvListado.Columns[1].Visible = false;
-            DgvListado.Columns[2].Width = 110;
-            DgvListado.Columns[2].HeaderText = "Categoría";
-            DgvListado.Columns[3].Width = 100;
-            DgvListado.Columns[3].HeaderText = "Código";
-            DgvListado.Columns[4].Width = 150;
-            DgvListado.Columns[4].HeaderText = "Nombre";
-            DgvListado.Columns[5].Width = 100;
-            DgvListado.Columns[5].HeaderText = "Precio Venta";
+            DgvListado.Columns[2].Width = 100;
+            DgvListado.Columns[2].HeaderText = "Código";
+            DgvListado.Columns[3].Width = 150;
+            DgvListado.Columns[3].HeaderText = "Nombre";
+            DgvListado.Columns[4].Width = 100;
+            DgvListado.Columns[4].HeaderText = "Precio Venta";
+            DgvListado.Columns[5].Width = 80;
+            DgvListado.Columns[5].HeaderText = "Stock";
             DgvListado.Columns[6].Width = 80;
-            DgvListado.Columns[6].HeaderText = "Stock";
-            DgvListado.Columns[7].Width = 50;
-            DgvListado.Columns[7].HeaderText = "Estado";
+            DgvListado.Columns[6].HeaderText = "Estado";
+            DgvListado.Columns[7].Visible = false;
+            DgvListado.Columns[8].Width = 150;
+            DgvListado.Columns[8].HeaderText = "Categoría";
         }
 
         private void Buscar()

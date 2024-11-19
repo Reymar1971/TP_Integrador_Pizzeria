@@ -15,7 +15,8 @@ namespace Entity
         private int stock;
         private Boolean estado;
         private Categoria tipoCategoria;
-        
+        private string descripcionCategoria;
+
 
         public int IdProducto { get => idProducto; set => idProducto = value; }
         public string Codigo { get => codigo; set => codigo = value; }
@@ -24,5 +25,6 @@ namespace Entity
         public int Stock { get => stock; set => stock = value; }
         public bool Estado { get => estado; set => estado = value; }
         public Categoria TipoCategoria { get => tipoCategoria; set => tipoCategoria = value; }
+        public string DescripcionCategoria { get => tipoCategoria?.Nombre; }
     }
 }
