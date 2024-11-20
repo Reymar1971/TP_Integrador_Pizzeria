@@ -55,20 +55,51 @@ namespace UI
 
         private void AgregarDetalle(int IdArticulo, string Codigo, string Nombre, Decimal Precio)
         {
-            DataRow fila = DtDetalle.NewRow();
-            fila["idarticulo"] = IdArticulo;
-            fila["codigo"] = Codigo;
-            fila["articulo"] = Nombre;
-            fila["cantidad"] = 1;
-            fila["precio"] = Precio;
-            fila["importe"] = Precio;
-            this.DtDetalle.Rows.Add(fila);
+            bool Agregar = true;
+            foreach (DataRow FilaTemp in DtDetalle.Rows)
+            {
+                if (Convert.ToInt32(FilaTemp["idarticulo"]) == IdArticulo)
+                {
+                    Agregar = false;
+                    MessageBox.Show("El producto ya ha sido agredado al detalle");
+                }
+
+            }
+            if (Agregar)
+            {
+                DataRow fila = DtDetalle.NewRow();
+                fila["idarticulo"] = IdArticulo;
+                fila["codigo"] = Codigo;
+                fila["articulo"] = Nombre;
+                fila["cantidad"] = 1;
+                fila["precio"] = Precio;
+                fila["importe"] = Precio;
+                this.DtDetalle.Rows.Add(fila);
+                this.CalcularTotales();
+            }
+
+        }
+
+        private void CalcularTotales()
+        {
+            decimal Total = 0;
+            decimal Subtotal = 0;
+            decimal CostoEnvio = Convert.ToDecimal(TxtCostoEnvio.Text);
+            foreach (DataRow FilaTem in DtDetalle.Rows)
+            {
+                Subtotal = Subtotal + Convert.ToDecimal(FilaTem["Importe"]);
+            }
+            Total = Subtotal + CostoEnvio;
+            TxtTotal.Text = Total.ToString("#0.00#");
+            TxtSubTotal.Text = Subtotal.ToString("#0.00#");
+
         }
 
         private void FrmPedido_Load(object sender, EventArgs e)
         {
             TabGeneral.SelectedIndex = 1;
             this.CrearTabla();
+            TxtCostoEnvio.Enabled = false;
         }
 
         private void FormatoProductos()
@@ -186,11 +217,13 @@ namespace UI
             {
                 if (ChkEnvio.Checked)
                 {
-                    TxtCostoEnvio.Text = "1500";
+                    TxtCostoEnvio.Enabled = true;
                 }
                 else
                 {
+                    TxtCostoEnvio.Enabled = false;
                     TxtCostoEnvio.Text = "0";
+                    this.CalcularTotales();
                 }
             }
             catch (Exception ex)
@@ -236,6 +269,45 @@ namespace UI
             Precio = Convert.ToDecimal(DgvProductos.CurrentRow.Cells[3].Value);
             this.AgregarDetalle(IdArticulo, Codigo, Nombre, Precio);
 
+        }
+
+        private void DgvDetalle_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataRow Fila = (DataRow)DtDetalle.Rows[e.RowIndex];
+            decimal Precio = Convert.ToDecimal(Fila["Precio"]);
+            int Cantidad = Convert.ToInt32(Fila["Cantidad"]);
+            Fila["Importe"] = Precio * Cantidad;
+            this.CalcularTotales();
+        }
+
+        private void TxtCostoEnvio_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    this.CalcularTotales();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            // Limpia el DataTable asociado al DataGridView
+            DtDetalle.Clear();
+
+            // Actualiza el DataGridView
+            DgvDetalle.DataSource = DtDetalle;
+
+            // Opcional: Recalcula los totales después de limpiar los detalles
+            CalcularTotales();
         }
     }
 }

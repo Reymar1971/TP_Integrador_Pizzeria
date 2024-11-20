@@ -55,9 +55,6 @@
             label5 = new Label();
             TxtBuscarProductos = new TextBox();
             DgvDetalle = new DataGridView();
-            BtnActualizar = new Button();
-            BtnIngresar = new Button();
-            BtnCargar = new Button();
             BtnCancelar = new Button();
             BtnConfirmar = new Button();
             groupBox1 = new GroupBox();
@@ -227,9 +224,6 @@
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(TxtBuscarProductos);
             groupBox2.Controls.Add(DgvDetalle);
-            groupBox2.Controls.Add(BtnActualizar);
-            groupBox2.Controls.Add(BtnIngresar);
-            groupBox2.Controls.Add(BtnCargar);
             groupBox2.Controls.Add(BtnCancelar);
             groupBox2.Controls.Add(BtnConfirmar);
             groupBox2.Location = new Point(17, 143);
@@ -290,10 +284,11 @@
             // 
             TxtTotal.BackColor = SystemColors.InactiveCaption;
             TxtTotal.Enabled = false;
-            TxtTotal.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TxtTotal.ForeColor = Color.Black;
             TxtTotal.Location = new Point(646, 317);
             TxtTotal.Name = "TxtTotal";
-            TxtTotal.Size = new Size(93, 22);
+            TxtTotal.Size = new Size(93, 27);
             TxtTotal.TabIndex = 21;
             // 
             // TxtCostoEnvio
@@ -305,6 +300,8 @@
             TxtCostoEnvio.Name = "TxtCostoEnvio";
             TxtCostoEnvio.Size = new Size(93, 22);
             TxtCostoEnvio.TabIndex = 20;
+            TxtCostoEnvio.Text = "0";
+            TxtCostoEnvio.KeyDown += TxtCostoEnvio_KeyDown;
             // 
             // TxtSubTotal
             // 
@@ -369,42 +366,17 @@
             DgvDetalle.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvDetalle.Size = new Size(722, 222);
             DgvDetalle.TabIndex = 13;
-            // 
-            // BtnActualizar
-            // 
-            BtnActualizar.Location = new Point(65, 315);
-            BtnActualizar.Name = "BtnActualizar";
-            BtnActualizar.Size = new Size(75, 23);
-            BtnActualizar.TabIndex = 8;
-            BtnActualizar.Text = "Actualizar";
-            BtnActualizar.UseVisualStyleBackColor = true;
-            // 
-            // BtnIngresar
-            // 
-            BtnIngresar.Location = new Point(65, 315);
-            BtnIngresar.Name = "BtnIngresar";
-            BtnIngresar.Size = new Size(75, 23);
-            BtnIngresar.TabIndex = 6;
-            BtnIngresar.Text = "Ingresar";
-            BtnIngresar.UseVisualStyleBackColor = true;
-            // 
-            // BtnCargar
-            // 
-            BtnCargar.Location = new Point(308, 315);
-            BtnCargar.Name = "BtnCargar";
-            BtnCargar.Size = new Size(75, 23);
-            BtnCargar.TabIndex = 12;
-            BtnCargar.Text = "Cargar";
-            BtnCargar.UseVisualStyleBackColor = true;
+            DgvDetalle.CellEndEdit += DgvDetalle_CellEndEdit;
             // 
             // BtnCancelar
             // 
-            BtnCancelar.Location = new Point(424, 315);
+            BtnCancelar.Location = new Point(378, 315);
             BtnCancelar.Name = "BtnCancelar";
             BtnCancelar.Size = new Size(75, 23);
             BtnCancelar.TabIndex = 7;
             BtnCancelar.Text = "Cancelar";
             BtnCancelar.UseVisualStyleBackColor = true;
+            BtnCancelar.Click += BtnCancelar_Click;
             // 
             // BtnConfirmar
             // 
@@ -562,15 +534,12 @@
         private GroupBox groupBox1;
         private TextBox TxtBuscar;
         private Label label3;
-        private Button BtnCargar;
         private TextBox TxtDireccion;
         private Button BtnConfirmar;
         private TextBox TxtId;
-        private Button BtnActualizar;
         private TextBox TxtNombre;
         private Button BtnCancelar;
         private Label label1;
-        private Button BtnIngresar;
         private Label label2;
         private Button BtncargaCliente;
         private Label label4;
