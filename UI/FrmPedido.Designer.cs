@@ -35,8 +35,8 @@
             BtnDesactivar = new Button();
             BtnActivar = new Button();
             ChkSeleccionar = new CheckBox();
-            BtnBuscar = new Button();
-            TxtBuscar = new TextBox();
+            BtnBuscarPedido = new Button();
+            TxtBuscarPedido = new TextBox();
             LblTotal = new Label();
             DgvListado = new DataGridView();
             Seleccionar = new DataGridViewCheckBoxColumn();
@@ -52,9 +52,10 @@
             BtnCancelar = new Button();
             BtnConfirmar = new Button();
             groupBox1 = new GroupBox();
+            BtnCancelaCliente = new Button();
             BtncargaCliente = new Button();
             label4 = new Label();
-            TxtTelefono = new TextBox();
+            TxtBuscar = new TextBox();
             label3 = new Label();
             TxtDireccion = new TextBox();
             TxtId = new TextBox();
@@ -87,8 +88,8 @@
             tabPage1.Controls.Add(BtnDesactivar);
             tabPage1.Controls.Add(BtnActivar);
             tabPage1.Controls.Add(ChkSeleccionar);
-            tabPage1.Controls.Add(BtnBuscar);
-            tabPage1.Controls.Add(TxtBuscar);
+            tabPage1.Controls.Add(BtnBuscarPedido);
+            tabPage1.Controls.Add(TxtBuscarPedido);
             tabPage1.Controls.Add(LblTotal);
             tabPage1.Controls.Add(DgvListado);
             tabPage1.Location = new Point(4, 24);
@@ -147,21 +148,21 @@
             ChkSeleccionar.Text = "Seleccionar";
             ChkSeleccionar.UseVisualStyleBackColor = true;
             // 
-            // BtnBuscar
+            // BtnBuscarPedido
             // 
-            BtnBuscar.Location = new Point(398, 19);
-            BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(75, 23);
-            BtnBuscar.TabIndex = 7;
-            BtnBuscar.Text = "Buscar";
-            BtnBuscar.UseVisualStyleBackColor = true;
+            BtnBuscarPedido.Location = new Point(398, 19);
+            BtnBuscarPedido.Name = "BtnBuscarPedido";
+            BtnBuscarPedido.Size = new Size(75, 23);
+            BtnBuscarPedido.TabIndex = 7;
+            BtnBuscarPedido.Text = "Buscar";
+            BtnBuscarPedido.UseVisualStyleBackColor = true;
             // 
-            // TxtBuscar
+            // TxtBuscarPedido
             // 
-            TxtBuscar.Location = new Point(16, 19);
-            TxtBuscar.Name = "TxtBuscar";
-            TxtBuscar.Size = new Size(367, 23);
-            TxtBuscar.TabIndex = 6;
+            TxtBuscarPedido.Location = new Point(16, 19);
+            TxtBuscarPedido.Name = "TxtBuscarPedido";
+            TxtBuscarPedido.Size = new Size(367, 23);
+            TxtBuscarPedido.TabIndex = 6;
             // 
             // LblTotal
             // 
@@ -303,9 +304,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(BtnCancelaCliente);
             groupBox1.Controls.Add(BtncargaCliente);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(TxtTelefono);
+            groupBox1.Controls.Add(TxtBuscar);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(TxtDireccion);
             groupBox1.Controls.Add(TxtId);
@@ -319,14 +321,25 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Cliente";
             // 
+            // BtnCancelaCliente
+            // 
+            BtnCancelaCliente.Location = new Point(550, 92);
+            BtnCancelaCliente.Name = "BtnCancelaCliente";
+            BtnCancelaCliente.Size = new Size(96, 23);
+            BtnCancelaCliente.TabIndex = 17;
+            BtnCancelaCliente.Text = "Cancela";
+            BtnCancelaCliente.UseVisualStyleBackColor = true;
+            BtnCancelaCliente.Click += BtnCancelaCliente_Click;
+            // 
             // BtncargaCliente
             // 
-            BtncargaCliente.Location = new Point(439, 92);
+            BtncargaCliente.Location = new Point(412, 93);
             BtncargaCliente.Name = "BtncargaCliente";
-            BtncargaCliente.Size = new Size(123, 23);
+            BtncargaCliente.Size = new Size(103, 23);
             BtncargaCliente.TabIndex = 16;
             BtncargaCliente.Text = "Carga Cliente";
             BtncargaCliente.UseVisualStyleBackColor = true;
+            BtncargaCliente.Click += BtncargaCliente_Click;
             // 
             // label4
             // 
@@ -337,13 +350,13 @@
             label4.TabIndex = 15;
             label4.Text = "ID:";
             // 
-            // TxtTelefono
+            // TxtBuscar
             // 
-            TxtTelefono.Location = new Point(177, 28);
-            TxtTelefono.Name = "TxtTelefono";
-            TxtTelefono.Size = new Size(197, 23);
-            TxtTelefono.TabIndex = 14;
-            TxtTelefono.KeyDown += TxtTelefono_KeyDown;
+            TxtBuscar.Location = new Point(177, 28);
+            TxtBuscar.Name = "TxtBuscar";
+            TxtBuscar.Size = new Size(197, 23);
+            TxtBuscar.TabIndex = 14;
+            TxtBuscar.KeyDown += TxtTelefono_KeyDown;
             // 
             // label3
             // 
@@ -425,14 +438,14 @@
         private Button BtnDesactivar;
         private Button BtnActivar;
         private CheckBox ChkSeleccionar;
-        private Button BtnBuscar;
-        private TextBox TxtBuscar;
+        private Button BtnBuscarPedido;
+        private TextBox TxtBuscarPedido;
         private Label LblTotal;
         private DataGridView DgvListado;
         private DataGridViewCheckBoxColumn Seleccionar;
         private TabPage tabPage2;
         private GroupBox groupBox1;
-        private TextBox TxtTelefono;
+        private TextBox TxtBuscar;
         private Label label3;
         private Button BtnCargar;
         private TextBox TxtDireccion;
@@ -451,5 +464,6 @@
         private Label label5;
         private TextBox textBox1;
         private DataGridView DgvPedido;
+        private Button BtnCancelaCliente;
     }
 }
