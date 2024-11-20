@@ -16,6 +16,7 @@ namespace UI
     {
         PedidoBusinss pedidoBusiness = new PedidoBusinss();
         ClienteBusiness clienteBusiness = new ClienteBusiness();
+        ProductoBusiness productoBusiness = new ProductoBusiness();
 
         public FrmPedido()
         {
@@ -27,43 +28,65 @@ namespace UI
             TabGeneral.SelectedIndex = 1;
         }
 
-        // Busqueda de el cliente en la base de datos, si no esta se da de alta
+        private void FormatoProductos()
+        {
+            DgvProductos.Columns[0].Visible = false;
+            DgvProductos.Columns[1].Width = 120;
+            DgvProductos.Columns[1].HeaderText = "Código";
+            DgvProductos.Columns[2].Width = 200;
+            DgvProductos.Columns[2].HeaderText = "Nombre";
+            DgvProductos.Columns[3].Width = 100;
+            DgvProductos.Columns[3].HeaderText = "Precio Venta";
+            DgvProductos.Columns[4].Width = 80;
+            DgvProductos.Columns[4].HeaderText = "Stock";
+            DgvProductos.Columns[5].Width = 80;
+            DgvProductos.Columns[5].HeaderText = "Estado";
+            DgvProductos.Columns[6].Visible = false;
+            DgvProductos.Columns[7].Visible = false;
 
-        //private void VerificarNumeroTelefono()
-        //{
-        //    string numeroTelefono = TxtBuscar.Text;
-        //    ClienteBusiness clienteBusiness = new ClienteBusiness();
+        }
 
-        //    if (clienteBusiness.ExisteNumeroTelefono(numeroTelefono))
-        //    {
-        //        MessageBox.Show("El número de teléfono ya existe en la base de datos.");
+        private void BuscarProductos()
+        {
+            try
+            {
+                DgvProductos.DataSource = productoBusiness.Buscar(TxtBuscarProductos.Text.Trim());
+                this.FormatoProductos();
+            }
+            catch (Exception ex)
+            {
 
-
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("El número de teléfono no existe en la base de datos.");
-        //    }
-        //}
+                throw;
+            }
+        }
 
         private void VerificarYActualizarCliente()
         {
-            string numeroTelefono = TxtBuscar.Text;
-
-            Cliente cliente = pedidoBusiness.ObtenerClientePorTelefono(numeroTelefono);
-
-            if (cliente != null)
+            try
             {
-                TxtNombre.Text = cliente.NombreApellido;
-                TxtDireccion.Text = cliente.Direccion;
-                TxtId.Text = Convert.ToInt32(cliente.IdCliente).ToString();
-                MessageBox.Show("Cliente encontrado y datos cargados.");
-                BtncargaCliente.Enabled = false;
+                string numeroTelefono = TxtBuscar.Text;
+
+                Cliente cliente = pedidoBusiness.ObtenerClientePorTelefono(numeroTelefono);
+
+                if (cliente != null)
+                {
+                    TxtNombre.Text = cliente.NombreApellido;
+                    TxtDireccion.Text = cliente.Direccion;
+                    TxtId.Text = Convert.ToInt32(cliente.IdCliente).ToString();
+                    MessageBox.Show("Cliente encontrado y datos cargados.");
+                    BtncargaCliente.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("El número de teléfono no existe en la base de datos; complete los datos y pulse Carga Cliente");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("El número de teléfono no existe en la base de datos; complete los datos y pulse Carga Cliente");
+
+                MessageBox.Show(ex.Message);
             }
+
         }
 
         private void TxtTelefono_KeyDown(object sender, KeyEventArgs e)
@@ -80,7 +103,7 @@ namespace UI
             catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.Message);
             }
 
         }
@@ -107,12 +130,56 @@ namespace UI
                 cliente.IdCliente = Convert.ToInt32(TxtId.Text);
                 clienteBusiness.Carga(cliente);
                 MessageBox.Show("Cliente cargado correctamente");
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ChkEnvio_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ChkEnvio.Checked)
+                {
+                    TxtCostoEnvio.Text = "1500";
+                }
+                else
+                {
+                    TxtCostoEnvio.Text = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TxtBuscarProductos_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    PanelProductos.Visible = true;
+                    BuscarProductos();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnCerrarPanel_Click(object sender, EventArgs e)
+        {
+            PanelProductos.Visible = false;
         }
     }
 }

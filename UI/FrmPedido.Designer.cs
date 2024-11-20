@@ -42,9 +42,18 @@
             Seleccionar = new DataGridViewCheckBoxColumn();
             tabPage2 = new TabPage();
             groupBox2 = new GroupBox();
-            BtnBuscarProducto = new Button();
+            PanelProductos = new Panel();
+            BtnCerrarPanel = new Button();
+            DgvProductos = new DataGridView();
+            ChkEnvio = new CheckBox();
+            TxtTotal = new TextBox();
+            TxtCostoEnvio = new TextBox();
+            TxtSubTotal = new TextBox();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
             label5 = new Label();
-            textBox1 = new TextBox();
+            TxtBuscarProductos = new TextBox();
             DgvPedido = new DataGridView();
             BtnActualizar = new Button();
             BtnIngresar = new Button();
@@ -67,6 +76,8 @@
             ((System.ComponentModel.ISupportInitialize)DgvListado).BeginInit();
             tabPage2.SuspendLayout();
             groupBox2.SuspendLayout();
+            PanelProductos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvProductos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DgvPedido).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -205,61 +216,160 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(BtnBuscarProducto);
+            groupBox2.Controls.Add(PanelProductos);
+            groupBox2.Controls.Add(ChkEnvio);
+            groupBox2.Controls.Add(TxtTotal);
+            groupBox2.Controls.Add(TxtCostoEnvio);
+            groupBox2.Controls.Add(TxtSubTotal);
+            groupBox2.Controls.Add(label8);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(label5);
-            groupBox2.Controls.Add(textBox1);
+            groupBox2.Controls.Add(TxtBuscarProductos);
             groupBox2.Controls.Add(DgvPedido);
             groupBox2.Controls.Add(BtnActualizar);
             groupBox2.Controls.Add(BtnIngresar);
             groupBox2.Controls.Add(BtnCargar);
             groupBox2.Controls.Add(BtnCancelar);
             groupBox2.Controls.Add(BtnConfirmar);
-            groupBox2.Location = new Point(17, 144);
+            groupBox2.Location = new Point(17, 143);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(752, 344);
             groupBox2.TabIndex = 16;
             groupBox2.TabStop = false;
             groupBox2.Text = "Pedido";
             // 
-            // BtnBuscarProducto
+            // PanelProductos
             // 
-            BtnBuscarProducto.Location = new Point(318, 18);
-            BtnBuscarProducto.Name = "BtnBuscarProducto";
-            BtnBuscarProducto.Size = new Size(121, 23);
-            BtnBuscarProducto.TabIndex = 16;
-            BtnBuscarProducto.Text = "Buscar Producto";
-            BtnBuscarProducto.UseVisualStyleBackColor = true;
+            PanelProductos.BackColor = Color.PaleGreen;
+            PanelProductos.Controls.Add(BtnCerrarPanel);
+            PanelProductos.Controls.Add(DgvProductos);
+            PanelProductos.Location = new Point(74, 56);
+            PanelProductos.Name = "PanelProductos";
+            PanelProductos.Size = new Size(654, 231);
+            PanelProductos.TabIndex = 24;
+            PanelProductos.Visible = false;
+            // 
+            // BtnCerrarPanel
+            // 
+            BtnCerrarPanel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnCerrarPanel.ForeColor = Color.OrangeRed;
+            BtnCerrarPanel.Location = new Point(604, 4);
+            BtnCerrarPanel.Name = "BtnCerrarPanel";
+            BtnCerrarPanel.Size = new Size(45, 22);
+            BtnCerrarPanel.TabIndex = 1;
+            BtnCerrarPanel.Text = "X";
+            BtnCerrarPanel.UseVisualStyleBackColor = true;
+            BtnCerrarPanel.Click += BtnCerrarPanel_Click;
+            // 
+            // DgvProductos
+            // 
+            DgvProductos.AllowUserToAddRows = false;
+            DgvProductos.AllowUserToDeleteRows = false;
+            DgvProductos.BackgroundColor = Color.DarkSeaGreen;
+            DgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvProductos.Location = new Point(16, 31);
+            DgvProductos.Name = "DgvProductos";
+            DgvProductos.ReadOnly = true;
+            DgvProductos.Size = new Size(622, 182);
+            DgvProductos.TabIndex = 0;
+            // 
+            // ChkEnvio
+            // 
+            ChkEnvio.AutoSize = true;
+            ChkEnvio.Location = new Point(652, 18);
+            ChkEnvio.Name = "ChkEnvio";
+            ChkEnvio.Size = new Size(80, 19);
+            ChkEnvio.TabIndex = 23;
+            ChkEnvio.Text = "Con Envío";
+            ChkEnvio.UseVisualStyleBackColor = true;
+            ChkEnvio.CheckedChanged += ChkEnvio_CheckedChanged;
+            // 
+            // TxtTotal
+            // 
+            TxtTotal.BackColor = SystemColors.InactiveCaption;
+            TxtTotal.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtTotal.Location = new Point(646, 317);
+            TxtTotal.Name = "TxtTotal";
+            TxtTotal.Size = new Size(93, 22);
+            TxtTotal.TabIndex = 21;
+            // 
+            // TxtCostoEnvio
+            // 
+            TxtCostoEnvio.BackColor = SystemColors.InactiveCaption;
+            TxtCostoEnvio.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtCostoEnvio.Location = new Point(646, 293);
+            TxtCostoEnvio.Name = "TxtCostoEnvio";
+            TxtCostoEnvio.Size = new Size(93, 22);
+            TxtCostoEnvio.TabIndex = 20;
+            // 
+            // TxtSubTotal
+            // 
+            TxtSubTotal.BackColor = SystemColors.InactiveCaption;
+            TxtSubTotal.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtSubTotal.Location = new Point(646, 268);
+            TxtSubTotal.Name = "TxtSubTotal";
+            TxtSubTotal.Size = new Size(93, 22);
+            TxtSubTotal.TabIndex = 19;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(568, 323);
+            label8.Name = "label8";
+            label8.Size = new Size(77, 15);
+            label8.TabIndex = 18;
+            label8.Text = "Total             $";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(567, 299);
+            label7.Name = "label7";
+            label7.Size = new Size(79, 15);
+            label7.TabIndex = 17;
+            label7.Text = "Costo Envío $";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(568, 272);
+            label6.Name = "label6";
+            label6.Size = new Size(79, 15);
+            label6.TabIndex = 16;
+            label6.Text = "SubTotal       $";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(17, 26);
+            label5.Location = new Point(17, 22);
             label5.Name = "label5";
-            label5.Size = new Size(101, 15);
+            label5.Size = new Size(99, 15);
             label5.TabIndex = 15;
-            label5.Text = "Código Producto:";
+            label5.Text = "Buscar productos";
             // 
-            // textBox1
+            // TxtBuscarProductos
             // 
-            textBox1.Location = new Point(124, 18);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(152, 23);
-            textBox1.TabIndex = 14;
+            TxtBuscarProductos.Location = new Point(124, 15);
+            TxtBuscarProductos.Name = "TxtBuscarProductos";
+            TxtBuscarProductos.Size = new Size(391, 23);
+            TxtBuscarProductos.TabIndex = 14;
+            TxtBuscarProductos.KeyDown += TxtBuscarProductos_KeyDown;
             // 
             // DgvPedido
             // 
             DgvPedido.AllowUserToAddRows = false;
             DgvPedido.AllowUserToDeleteRows = false;
             DgvPedido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvPedido.Location = new Point(17, 47);
+            DgvPedido.Location = new Point(17, 44);
             DgvPedido.Name = "DgvPedido";
             DgvPedido.ReadOnly = true;
-            DgvPedido.Size = new Size(722, 251);
+            DgvPedido.Size = new Size(722, 222);
             DgvPedido.TabIndex = 13;
             // 
             // BtnActualizar
             // 
-            BtnActualizar.Location = new Point(157, 314);
+            BtnActualizar.Location = new Point(65, 315);
             BtnActualizar.Name = "BtnActualizar";
             BtnActualizar.Size = new Size(75, 23);
             BtnActualizar.TabIndex = 8;
@@ -268,7 +378,7 @@
             // 
             // BtnIngresar
             // 
-            BtnIngresar.Location = new Point(157, 314);
+            BtnIngresar.Location = new Point(65, 315);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(75, 23);
             BtnIngresar.TabIndex = 6;
@@ -277,7 +387,7 @@
             // 
             // BtnCargar
             // 
-            BtnCargar.Location = new Point(400, 314);
+            BtnCargar.Location = new Point(308, 315);
             BtnCargar.Name = "BtnCargar";
             BtnCargar.Size = new Size(75, 23);
             BtnCargar.TabIndex = 12;
@@ -286,7 +396,7 @@
             // 
             // BtnCancelar
             // 
-            BtnCancelar.Location = new Point(516, 314);
+            BtnCancelar.Location = new Point(424, 315);
             BtnCancelar.Name = "BtnCancelar";
             BtnCancelar.Size = new Size(75, 23);
             BtnCancelar.TabIndex = 7;
@@ -295,7 +405,7 @@
             // 
             // BtnConfirmar
             // 
-            BtnConfirmar.Location = new Point(279, 314);
+            BtnConfirmar.Location = new Point(187, 315);
             BtnConfirmar.Name = "BtnConfirmar";
             BtnConfirmar.Size = new Size(75, 23);
             BtnConfirmar.TabIndex = 10;
@@ -363,9 +473,9 @@
             label3.AutoSize = true;
             label3.Location = new Point(14, 36);
             label3.Name = "label3";
-            label3.Size = new Size(55, 15);
+            label3.Size = new Size(52, 15);
             label3.TabIndex = 13;
-            label3.Text = "Telefono:";
+            label3.Text = "Teléfono";
             // 
             // TxtDireccion
             // 
@@ -387,18 +497,18 @@
             label1.AutoSize = true;
             label1.Location = new Point(14, 67);
             label1.Name = "label1";
-            label1.Size = new Size(110, 15);
+            label1.Size = new Size(107, 15);
             label1.TabIndex = 0;
-            label1.Text = "Nombre y Apellido:";
+            label1.Text = "Nombre y Apellido";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(14, 100);
             label2.Name = "label2";
-            label2.Size = new Size(56, 15);
+            label2.Size = new Size(53, 15);
             label2.TabIndex = 1;
-            label2.Text = "Diección:";
+            label2.Text = "Diección";
             // 
             // TxtNombre
             // 
@@ -423,6 +533,8 @@
             tabPage2.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            PanelProductos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DgvProductos).EndInit();
             ((System.ComponentModel.ISupportInitialize)DgvPedido).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -460,10 +572,19 @@
         private Button BtncargaCliente;
         private Label label4;
         private GroupBox groupBox2;
-        private Button BtnBuscarProducto;
         private Label label5;
-        private TextBox textBox1;
+        private TextBox TxtBuscarProductos;
         private DataGridView DgvPedido;
         private Button BtnCancelaCliente;
+        private TextBox TxtSubTotal;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private TextBox TxtTotal;
+        private TextBox TxtCostoEnvio;
+        private CheckBox ChkEnvio;
+        private Panel PanelProductos;
+        private DataGridView DgvProductos;
+        private Button BtnCerrarPanel;
     }
 }

@@ -130,7 +130,7 @@ namespace DAL
                 using (conn)
                 {
                     conn.Open();
-                    string query = "SELECT ID_PRODUCTO,ID_CATEGORIA,CODIGO,NOMBRE,PRECIO_VENTA,STOCK FROM Productos WHERE NOMBRE LIKE '%' + @nombreProducto + '%'";
+                    string query = "SELECT ID_PRODUCTO,ID_CATEGORIA,CODIGO,NOMBRE,PRECIO_VENTA,STOCK,ESTADO FROM Productos WHERE NOMBRE LIKE '%' + @nombreProducto + '%'";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@nombreProducto", nombreProducto);
