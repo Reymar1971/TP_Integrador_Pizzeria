@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class PedidoBusinss
+    public class PedidoBusiness
     {
         PedidoDao pedidoDao = new PedidoDao();
 

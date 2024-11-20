@@ -15,7 +15,7 @@ namespace UI
     public partial class FrmPedido : Form
     {
         private DataTable DtDetalle = new DataTable();
-        PedidoBusinss pedidoBusiness = new PedidoBusinss();
+        PedidoBusiness pedidoBusiness = new PedidoBusiness();
         ClienteBusiness clienteBusiness = new ClienteBusiness();
         ProductoBusiness productoBusiness = new ProductoBusiness();
 
@@ -98,7 +98,7 @@ namespace UI
             }
             catch (RowNotInTableException ex)
             {
-                // Handle the exception or log it
+                // Maneja la excepcion.
             }
 
             Total = Subtotal + CostoEnvio;
