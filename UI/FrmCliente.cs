@@ -94,7 +94,7 @@ namespace UI
                 BtnConfirmar.Visible = false;
                 BtnCargar.Visible = false;
                 TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["IdCliente"].Value);
-                TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+                TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["NombreApellido"].Value);
                 TxtDireccion.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Direccion"].Value);
                 TxtTelefono.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Telefono"].Value);
                 TabGeneral.SelectedIndex = 1;
