@@ -28,33 +28,110 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            menuStrip1 = new MenuStrip();
+            gestionToolStripMenuItem = new ToolStripMenuItem();
+            pedidosToolStripMenuItem = new ToolStripMenuItem();
+            clientesToolStripMenuItem = new ToolStripMenuItem();
+            almacenToolStripMenuItem = new ToolStripMenuItem();
+            categiriasToolStripMenuItem = new ToolStripMenuItem();
+            productosToolStripMenuItem = new ToolStripMenuItem();
+            consultasToolStripMenuItem = new ToolStripMenuItem();
+            salirToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // button1
+            // menuStrip1
             // 
-            button1.Location = new Point(652, 392);
-            button1.Name = "button1";
-            button1.Size = new Size(86, 41);
-            button1.TabIndex = 0;
-            button1.Text = "Probar Conexion";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { gestionToolStripMenuItem, almacenToolStripMenuItem, consultasToolStripMenuItem, salirToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(789, 24);
+            menuStrip1.TabIndex = 1;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // gestionToolStripMenuItem
+            // 
+            gestionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pedidosToolStripMenuItem, clientesToolStripMenuItem });
+            gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
+            gestionToolStripMenuItem.Size = new Size(53, 20);
+            gestionToolStripMenuItem.Text = "Ventas";
+            // 
+            // pedidosToolStripMenuItem
+            // 
+            pedidosToolStripMenuItem.Name = "pedidosToolStripMenuItem";
+            pedidosToolStripMenuItem.Size = new Size(116, 22);
+            pedidosToolStripMenuItem.Text = "Pedidos";
+            pedidosToolStripMenuItem.Click += pedidosToolStripMenuItem_Click;
+            // 
+            // clientesToolStripMenuItem
+            // 
+            clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            clientesToolStripMenuItem.Size = new Size(116, 22);
+            clientesToolStripMenuItem.Text = "Clientes";
+            clientesToolStripMenuItem.Click += clientesToolStripMenuItem_Click;
+            // 
+            // almacenToolStripMenuItem
+            // 
+            almacenToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { categiriasToolStripMenuItem, productosToolStripMenuItem });
+            almacenToolStripMenuItem.Name = "almacenToolStripMenuItem";
+            almacenToolStripMenuItem.Size = new Size(66, 20);
+            almacenToolStripMenuItem.Text = "Almacén";
+            // 
+            // categiriasToolStripMenuItem
+            // 
+            categiriasToolStripMenuItem.Name = "categiriasToolStripMenuItem";
+            categiriasToolStripMenuItem.Size = new Size(130, 22);
+            categiriasToolStripMenuItem.Text = "Categorías";
+            categiriasToolStripMenuItem.Click += categiriasToolStripMenuItem_Click;
+            // 
+            // productosToolStripMenuItem
+            // 
+            productosToolStripMenuItem.Name = "productosToolStripMenuItem";
+            productosToolStripMenuItem.Size = new Size(130, 22);
+            productosToolStripMenuItem.Text = "Productos";
+            productosToolStripMenuItem.Click += productosToolStripMenuItem_Click;
+            // 
+            // consultasToolStripMenuItem
+            // 
+            consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
+            consultasToolStripMenuItem.Size = new Size(71, 20);
+            consultasToolStripMenuItem.Text = "Consultas";
+            // 
+            // salirToolStripMenuItem
+            // 
+            salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            salirToolStripMenuItem.Size = new Size(41, 20);
+            salirToolStripMenuItem.Text = "Salir";
+            salirToolStripMenuItem.Click += salirToolStripMenuItem_Click;
             // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(772, 459);
-            Controls.Add(button1);
+            ClientSize = new Size(789, 480);
+            Controls.Add(menuStrip1);
+            IsMdiContainer = true;
+            MainMenuStrip = menuStrip1;
             Name = "FrmPrincipal";
-            Text = "FrmPrincipal";
+            Text = "Sistema de Gestion para Pizzeria";
+            WindowState = FormWindowState.Maximized;
             Load += FrmPrincipal_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem gestionToolStripMenuItem;
+        private ToolStripMenuItem pedidosToolStripMenuItem;
+        private ToolStripMenuItem clientesToolStripMenuItem;
+        private ToolStripMenuItem almacenToolStripMenuItem;
+        private ToolStripMenuItem categiriasToolStripMenuItem;
+        private ToolStripMenuItem productosToolStripMenuItem;
+        private ToolStripMenuItem consultasToolStripMenuItem;
+        private ToolStripMenuItem salirToolStripMenuItem;
     }
 }
