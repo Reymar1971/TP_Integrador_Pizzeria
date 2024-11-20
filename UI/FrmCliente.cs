@@ -329,22 +329,6 @@ namespace UI
             }
         }
 
-        private void ChkSeleccionar_CheckedChanged_1(object sender, EventArgs e)
-        {
-            if (ChkSeleccionar.Checked)
-            {
-                DgvListado.Columns[0].Visible = true;
-                BtnActivar.Visible = true;
-                BtnDesactivar.Visible = true;
-                BtnEliminar.Visible = true;
-            }
-            else
-            {
-                DgvListado.Columns[0].Visible = false;
-                BtnActivar.Visible = false;
-                BtnDesactivar.Visible = false;
-                BtnEliminar.Visible = false;
-            }
-        }
+        
     }
 }

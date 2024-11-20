@@ -70,6 +70,7 @@
             DgvListado.ReadOnly = true;
             DgvListado.Size = new Size(721, 316);
             DgvListado.TabIndex = 4;
+            DgvListado.CellContentClick += DgvListado_CellContentClick;
             DgvListado.CellContentDoubleClick += DgvListado_CellContentDoubleClick;
             // 
             // Seleccionar
@@ -197,7 +198,7 @@
             ChkSeleccionar.TabIndex = 8;
             ChkSeleccionar.Text = "Seleccionar";
             ChkSeleccionar.UseVisualStyleBackColor = true;
-            ChkSeleccionar.CheckedChanged += ChkSeleccionar_CheckedChanged_1;
+            ChkSeleccionar.CheckedChanged += ChkSeleccionar_CheckedChanged;
             // 
             // BtnBuscar
             // 
