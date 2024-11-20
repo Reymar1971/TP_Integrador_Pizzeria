@@ -54,7 +54,7 @@
             label6 = new Label();
             label5 = new Label();
             TxtBuscarProductos = new TextBox();
-            DgvPedido = new DataGridView();
+            DgvDetalle = new DataGridView();
             BtnActualizar = new Button();
             BtnIngresar = new Button();
             BtnCargar = new Button();
@@ -78,7 +78,7 @@
             groupBox2.SuspendLayout();
             PanelProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvProductos).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)DgvPedido).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DgvDetalle).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -226,7 +226,7 @@
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(TxtBuscarProductos);
-            groupBox2.Controls.Add(DgvPedido);
+            groupBox2.Controls.Add(DgvDetalle);
             groupBox2.Controls.Add(BtnActualizar);
             groupBox2.Controls.Add(BtnIngresar);
             groupBox2.Controls.Add(BtnCargar);
@@ -244,7 +244,7 @@
             PanelProductos.BackColor = Color.PaleGreen;
             PanelProductos.Controls.Add(BtnCerrarPanel);
             PanelProductos.Controls.Add(DgvProductos);
-            PanelProductos.Location = new Point(74, 56);
+            PanelProductos.Location = new Point(98, 59);
             PanelProductos.Name = "PanelProductos";
             PanelProductos.Size = new Size(654, 231);
             PanelProductos.TabIndex = 24;
@@ -254,7 +254,7 @@
             // 
             BtnCerrarPanel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnCerrarPanel.ForeColor = Color.OrangeRed;
-            BtnCerrarPanel.Location = new Point(604, 4);
+            BtnCerrarPanel.Location = new Point(599, 4);
             BtnCerrarPanel.Name = "BtnCerrarPanel";
             BtnCerrarPanel.Size = new Size(45, 22);
             BtnCerrarPanel.TabIndex = 1;
@@ -273,6 +273,7 @@
             DgvProductos.ReadOnly = true;
             DgvProductos.Size = new Size(622, 182);
             DgvProductos.TabIndex = 0;
+            DgvProductos.CellDoubleClick += DgvProductos_CellDoubleClick;
             // 
             // ChkEnvio
             // 
@@ -288,6 +289,7 @@
             // TxtTotal
             // 
             TxtTotal.BackColor = SystemColors.InactiveCaption;
+            TxtTotal.Enabled = false;
             TxtTotal.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtTotal.Location = new Point(646, 317);
             TxtTotal.Name = "TxtTotal";
@@ -297,6 +299,7 @@
             // TxtCostoEnvio
             // 
             TxtCostoEnvio.BackColor = SystemColors.InactiveCaption;
+            TxtCostoEnvio.Enabled = false;
             TxtCostoEnvio.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtCostoEnvio.Location = new Point(646, 293);
             TxtCostoEnvio.Name = "TxtCostoEnvio";
@@ -306,6 +309,7 @@
             // TxtSubTotal
             // 
             TxtSubTotal.BackColor = SystemColors.InactiveCaption;
+            TxtSubTotal.Enabled = false;
             TxtSubTotal.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtSubTotal.Location = new Point(646, 268);
             TxtSubTotal.Name = "TxtSubTotal";
@@ -356,16 +360,15 @@
             TxtBuscarProductos.TabIndex = 14;
             TxtBuscarProductos.KeyDown += TxtBuscarProductos_KeyDown;
             // 
-            // DgvPedido
+            // DgvDetalle
             // 
-            DgvPedido.AllowUserToAddRows = false;
-            DgvPedido.AllowUserToDeleteRows = false;
-            DgvPedido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvPedido.Location = new Point(17, 44);
-            DgvPedido.Name = "DgvPedido";
-            DgvPedido.ReadOnly = true;
-            DgvPedido.Size = new Size(722, 222);
-            DgvPedido.TabIndex = 13;
+            DgvDetalle.AllowUserToAddRows = false;
+            DgvDetalle.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvDetalle.Location = new Point(17, 44);
+            DgvDetalle.Name = "DgvDetalle";
+            DgvDetalle.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DgvDetalle.Size = new Size(722, 222);
+            DgvDetalle.TabIndex = 13;
             // 
             // BtnActualizar
             // 
@@ -535,7 +538,7 @@
             groupBox2.PerformLayout();
             PanelProductos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvProductos).EndInit();
-            ((System.ComponentModel.ISupportInitialize)DgvPedido).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DgvDetalle).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -574,7 +577,7 @@
         private GroupBox groupBox2;
         private Label label5;
         private TextBox TxtBuscarProductos;
-        private DataGridView DgvPedido;
+        private DataGridView DgvDetalle;
         private Button BtnCancelaCliente;
         private TextBox TxtSubTotal;
         private Label label8;
