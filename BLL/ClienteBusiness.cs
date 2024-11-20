@@ -151,5 +151,9 @@ namespace BLL
             }
         }
 
+        public bool ExisteNumeroTelefono(string numeroTelefono)
+        {
+            return clienteDao.ExisteNumeroTelefono(numeroTelefono);
+        }
     }
 }

@@ -195,5 +195,30 @@ namespace DAL
             }
         }
 
+        public bool ExisteNumeroTelefono(string numeroTelefono)
+        {
+            SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());
+
+            try
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    string query = "SELECT COUNT(*) FROM Clientes WHERE NumeroTelefono = @NumeroTelefono";
+                    SqlCommand command = new SqlCommand(query, conn);
+                    command.Parameters.AddWithValue("@NumeroTelefono", numeroTelefono);
+                                        
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
+        }
     }
 }
