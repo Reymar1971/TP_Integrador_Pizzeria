@@ -127,7 +127,6 @@ namespace UI
                 cliente.NombreApellido = TxtNombre.Text;
                 cliente.Direccion = TxtDireccion.Text;
                 cliente.Telefono = TxtBuscar.Text;
-                //cliente.IdCliente = Convert.ToInt32(TxtId.Text);
                 clienteBusiness.Carga(cliente);
                 MessageBox.Show("Cliente cargado correctamente");
 
