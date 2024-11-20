@@ -85,14 +85,25 @@ namespace UI
             decimal Total = 0;
             decimal Subtotal = 0;
             decimal CostoEnvio = Convert.ToDecimal(TxtCostoEnvio.Text);
-            foreach (DataRow FilaTem in DtDetalle.Rows)
+
+            try
             {
-                Subtotal = Subtotal + Convert.ToDecimal(FilaTem["Importe"]);
+                foreach (DataRow FilaTem in DtDetalle.Rows)
+                {
+                    if (FilaTem.RowState != DataRowState.Deleted)
+                    {
+                        Subtotal += Convert.ToDecimal(FilaTem["Importe"]);
+                    }
+                }
             }
+            catch (RowNotInTableException ex)
+            {
+                // Handle the exception or log it
+            }
+
             Total = Subtotal + CostoEnvio;
             TxtTotal.Text = Total.ToString("#0.00#");
             TxtSubTotal.Text = Subtotal.ToString("#0.00#");
-
         }
 
         private void FrmPedido_Load(object sender, EventArgs e)
@@ -308,6 +319,11 @@ namespace UI
 
             // Opcional: Recalcula los totales después de limpiar los detalles
             CalcularTotales();
+        }
+
+        private void DgvDetalle_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            this.CalcularTotales();
         }
     }
 }

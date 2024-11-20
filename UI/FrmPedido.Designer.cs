@@ -367,6 +367,7 @@
             DgvDetalle.Size = new Size(722, 222);
             DgvDetalle.TabIndex = 13;
             DgvDetalle.CellEndEdit += DgvDetalle_CellEndEdit;
+            DgvDetalle.RowsRemoved += DgvDetalle_RowsRemoved;
             // 
             // BtnCancelar
             // 
