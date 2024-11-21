@@ -94,7 +94,7 @@ namespace UI
                 BtnConfirmar.Visible = false;
                 BtnCargar.Visible = false;
                 TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["IdCliente"].Value);
-                TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+                TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["NombreApellido"].Value);
                 TxtDireccion.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Direccion"].Value);
                 TxtTelefono.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Telefono"].Value);
                 TabGeneral.SelectedIndex = 1;
@@ -329,22 +329,6 @@ namespace UI
             }
         }
 
-        private void ChkSeleccionar_CheckedChanged_1(object sender, EventArgs e)
-        {
-            if (ChkSeleccionar.Checked)
-            {
-                DgvListado.Columns[0].Visible = true;
-                BtnActivar.Visible = true;
-                BtnDesactivar.Visible = true;
-                BtnEliminar.Visible = true;
-            }
-            else
-            {
-                DgvListado.Columns[0].Visible = false;
-                BtnActivar.Visible = false;
-                BtnDesactivar.Visible = false;
-                BtnEliminar.Visible = false;
-            }
-        }
+        
     }
 }
