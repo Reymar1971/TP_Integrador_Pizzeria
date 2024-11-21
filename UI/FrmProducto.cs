@@ -235,6 +235,7 @@ namespace UI
                 producto.Nombre = TxtNombre.Text;
                 producto.PrecioVenta = Convert.ToDecimal(TxtPrecioVenta.Text);
                 producto.Stock = Convert.ToInt32(TxtStock.Text);
+                producto.TipoCategoria = new Categoria();
                 producto.TipoCategoria.IdCategoria = Convert.ToInt32(CmbCategoria.SelectedValue);
                 productoBusiness.Carga(producto);
                 MessageBox.Show("Producto cargado correctamente");
