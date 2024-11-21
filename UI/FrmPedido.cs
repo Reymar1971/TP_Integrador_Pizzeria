@@ -31,6 +31,7 @@ namespace UI
             this.DtDetalle.Columns.Add("articulo", Type.GetType("System.String"));
             this.DtDetalle.Columns.Add("cantidad", Type.GetType("System.Int32"));
             this.DtDetalle.Columns.Add("precio", Type.GetType("System.Decimal"));
+            this.DtDetalle.Columns.Add("stock", Type.GetType("System.Int32"));
             this.DtDetalle.Columns.Add("importe", Type.GetType("System.Decimal"));
 
             DgvDetalle.DataSource = this.DtDetalle;
@@ -41,19 +42,22 @@ namespace UI
             DgvDetalle.Columns[2].HeaderText = "Producto";
             DgvDetalle.Columns[2].Width = 250;
             DgvDetalle.Columns[3].HeaderText = "Cantidad";
-            DgvDetalle.Columns[3].Width = 100;
+            DgvDetalle.Columns[3].Width = 80;
             DgvDetalle.Columns[4].HeaderText = "Precio";
-            DgvDetalle.Columns[4].Width = 100;
-            DgvDetalle.Columns[5].HeaderText = "Importe";
-            DgvDetalle.Columns[5].Width = 100;
+            DgvDetalle.Columns[4].Width = 80;
+            DgvDetalle.Columns[5].HeaderText = "Stock";
+            DgvDetalle.Columns[5].Width = 70;
+            DgvDetalle.Columns[6].HeaderText = "Importe";
+            DgvDetalle.Columns[6].Width = 100;
 
             DgvDetalle.Columns[1].ReadOnly = true;
             DgvDetalle.Columns[2].ReadOnly = true;
             DgvDetalle.Columns[5].ReadOnly = true;
+            DgvDetalle.Columns[6].ReadOnly = true;
 
         }
 
-        private void AgregarDetalle(int IdArticulo, string Codigo, string Nombre, Decimal Precio)
+        private void AgregarDetalle(int IdArticulo, string Codigo, string Nombre, int Stock, Decimal Precio)
         {
             bool Agregar = true;
             foreach (DataRow FilaTemp in DtDetalle.Rows)
@@ -73,6 +77,7 @@ namespace UI
                 fila["articulo"] = Nombre;
                 fila["cantidad"] = 1;
                 fila["precio"] = Precio;
+                fila["stock"] = Stock;
                 fila["importe"] = Precio;
                 this.DtDetalle.Rows.Add(fila);
                 this.CalcularTotales();
@@ -135,7 +140,8 @@ namespace UI
         {
             try
             {
-                DgvProductos.DataSource = productoBusiness.Buscar(TxtBuscarProductos.Text.Trim());
+                // Aqui se listan todos los productos que tengan stock
+                DgvProductos.DataSource = pedidoBusiness.Buscar(TxtBuscarProductos.Text.Trim());
                 this.FormatoProductos();
             }
             catch (Exception ex)
@@ -271,14 +277,15 @@ namespace UI
 
         private void DgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int IdArticulo;
+            int IdArticulo, Stock;
             string Codigo, Nombre;
             decimal Precio;
             IdArticulo = Convert.ToInt32(DgvProductos.CurrentRow.Cells[0].Value);
             Codigo = Convert.ToString(DgvProductos.CurrentRow.Cells[1].Value);
             Nombre = Convert.ToString(DgvProductos.CurrentRow.Cells[2].Value);
+            Stock = Convert.ToInt32(DgvProductos.CurrentRow.Cells[4].Value);
             Precio = Convert.ToDecimal(DgvProductos.CurrentRow.Cells[3].Value);
-            this.AgregarDetalle(IdArticulo, Codigo, Nombre, Precio);
+            this.AgregarDetalle(IdArticulo, Codigo, Nombre, Stock, Precio);
 
         }
 
@@ -286,7 +293,13 @@ namespace UI
         {
             DataRow Fila = (DataRow)DtDetalle.Rows[e.RowIndex];
             decimal Precio = Convert.ToDecimal(Fila["Precio"]);
+            int Stock = Convert.ToInt32(Fila["Stock"]);
             int Cantidad = Convert.ToInt32(Fila["Cantidad"]);
+            if (Cantidad > Stock)
+            {
+                MessageBox.Show("Stock insuficiente; controle la contidad!!!");
+                Fila["Cantidad"] = 1;
+            }
             Fila["Importe"] = Precio * Cantidad;
             this.CalcularTotales();
         }

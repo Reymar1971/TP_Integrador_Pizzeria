@@ -12,7 +12,19 @@ namespace BLL
     public class PedidoBusiness
     {
         PedidoDao pedidoDao = new PedidoDao();
-       
+
+        public List<Producto> Buscar(string text)
+        {
+            try
+            {
+                return PedidoDao.Buscar(text);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public Cliente ObtenerClientePorTelefono(string numeroTelefono)
         {
             return PedidoDao.ObtenerClientePorTelefono(numeroTelefono);

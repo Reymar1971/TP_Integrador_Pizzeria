@@ -11,6 +11,43 @@ namespace DAL
 {
     public class PedidoDao
     {
+
+        // Este procedimiento no lista los productos que tengan stock en cero
+        public static List<Producto> Buscar(string nombreProducto)
+        {
+            try
+            {
+                List<Producto> productos = new List<Producto>();
+                SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());
+                using (conn)
+                {
+                    conn.Open();
+                    string query = "SELECT ID_PRODUCTO,ID_CATEGORIA,CODIGO,NOMBRE,PRECIO_VENTA,STOCK,ESTADO FROM Productos WHERE NOMBRE LIKE '%' + @nombreProducto + '%' AND STOCK > 0";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@nombreProducto", nombreProducto);
+                        cmd.ExecuteScalar();
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int idCategoria = Convert.ToInt32(reader["ID_CATEGORIA"].ToString());
+                                Categoria categoria = new CategoriaDao().GetById(idCategoria);
+                                Producto producto = ProductoMapper.Map(reader, categoria);
+                                productos.Add(producto);
+                            }
+                        }
+                    }
+                }
+                return productos;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public static Cliente ObtenerClientePorTelefono(string numeroTelefono)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
