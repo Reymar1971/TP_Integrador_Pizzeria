@@ -68,7 +68,7 @@ namespace DAL
             return null;
         }
 
-        public static void Carga(Pedido pedido)
+        public void Carga(Pedido pedido)
         {
             try
             {
@@ -76,15 +76,22 @@ namespace DAL
                 {
                     conn.Open();
 
-                    string insertQuery = "INSERT INTO Pedidos(ID_CLIENTE,CANTIDAD,FECHA,TOTAL) VALUES(@IdCliente, @Codigo,@Cantidad,@Fecha,@Total)";
+                    string insertQuery = "INSERT INTO Pedidos(ID_CLIENTE,CANTIDAD,FECHA,TOTAL) VALUES(@IdCliente,@Cantidad,@Fecha,@Total); SELECT SCOPE_IDENTITY();";
 
-                    using (SqlCommand commandInserExp = new SqlCommand(insertQuery, conn))
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
                     {
-                        commandInserExp.Parameters.AddWithValue("@IdCliente", pedido.Cliente.IdCliente);
-                        commandInserExp.Parameters.AddWithValue("@Cantidad", pedido.Cantidad);
-                        commandInserExp.Parameters.AddWithValue("@Fecha", pedido.Fecha.Date);
-                        commandInserExp.Parameters.AddWithValue("@Total", pedido.Total);
-                        commandInserExp.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("@IdCliente", pedido.Cliente.IdCliente);
+                        cmd.Parameters.AddWithValue("@Cantidad", pedido.Cantidad);
+                        cmd.Parameters.AddWithValue("@Fecha", pedido.Fecha.Date);
+                        cmd.Parameters.AddWithValue("@Total", pedido.Total);
+                    
+                        int nuevoIdPedido = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        foreach (var detalle in pedido.Detalle)
+                        {
+                            CargaDetalle(detalle, nuevoIdPedido);
+                        }
+
                     }
                 }
             }
@@ -94,7 +101,7 @@ namespace DAL
             }
         }
 
-        public static void CargaDetalle(DetallePedido detallePedido)
+        public void CargaDetalle(DetallePedido detallePedido, int idPedido)
         {
             try
             {
@@ -102,11 +109,11 @@ namespace DAL
                 {
                     conn.Open();
 
-                    string insertQuery = "INSERT INTO Detalla_Pedido(ID_PEDIDO,ID_PRODUCTO,CANTIDAD,PRECIO_UNITARIO) VALUES(@IdPedido, @IdProducto,@Cantidad,@PrecioUnitario)";
+                    string insertQuery = "INSERT INTO Detalle_Pedido(ID_PEDIDO,ID_PRODUCTO,CANTIDAD,PRECIO_UNITARIO) VALUES(@IdPedido, @IdProducto,@Cantidad,@PrecioUnitario)";
 
                     using (SqlCommand commandInserExp = new SqlCommand(insertQuery, conn))
                     {
-                        commandInserExp.Parameters.AddWithValue("@IdPedido", detallePedido.Pedido.IdPedido);
+                        commandInserExp.Parameters.AddWithValue("@IdPedido", idPedido);
                         commandInserExp.Parameters.AddWithValue("@IdProducto", detallePedido.Producto.IdProducto);
                         commandInserExp.Parameters.AddWithValue("@Cantidad", detallePedido.Cantidad);
                         commandInserExp.Parameters.AddWithValue("@PrecioUnitario", detallePedido.PrecioUnitario);

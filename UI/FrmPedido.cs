@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace UI
 {
@@ -22,6 +23,60 @@ namespace UI
         public FrmPedido()
         {
             InitializeComponent();
+        }
+
+        private void Limpiar()
+        {
+            TxtId.Clear();
+            TxtNombre.Clear();
+            TxtDireccion.Clear();
+            TxtBuscar.Clear();
+            // Limpia el DataTable asociado al DataGridView
+            DtDetalle.Clear();
+            // Actualiza el DataGridView
+            DgvDetalle.DataSource = DtDetalle;
+            // Opcional: Recalcula los totales después de limpiar los detalles
+            CalcularTotales();
+        }
+
+        private List<DetallePedido> ObtenerDetallePedido(DataTable dtDetalle)
+        {
+            List<DetallePedido> detallePedido = new List<DetallePedido>();
+            foreach (DataRow row in dtDetalle.Rows)
+            {
+                DetallePedido detalle = new DetallePedido
+                {
+                    Producto = new Producto { IdProducto = Convert.ToInt32(row["idarticulo"]) },
+                    Cantidad = Convert.ToInt32(row["cantidad"]),
+                    PrecioUnitario = Convert.ToDecimal(row["precio"])
+                };
+                detallePedido.Add(detalle);
+            }
+            return detallePedido;
+        }
+
+        private int CalcularCantidadTotalProductos(DataTable dtDetalle)
+        {
+            int cantidadTotal = 0;
+
+            foreach (DataRow row in dtDetalle.Rows)
+            {
+                cantidadTotal += Convert.ToInt32(row["cantidad"]);
+            }
+
+            return cantidadTotal;
+        }
+
+        private decimal CalcularMontoTotalPedido(DataTable dtDetalle)
+        {
+            decimal montoTotal = 0;
+
+            foreach (DataRow row in dtDetalle.Rows)
+            {
+                montoTotal += Convert.ToDecimal(row["precio"]);
+            }
+
+            return montoTotal;
         }
 
         private void CrearTabla()
@@ -344,7 +399,16 @@ namespace UI
             try
             {
                 Pedido pedido = new Pedido();
-
+                pedido.Detalle = new List<DetallePedido>();
+                pedido.Detalle = ObtenerDetallePedido(DtDetalle);
+                pedido.Cliente = new Cliente();
+                pedido.Cliente.IdCliente = Convert.ToInt32(TxtId.Text);
+                pedido.Fecha = DateTime.Now.Date;
+                pedido.Cantidad = CalcularCantidadTotalProductos(DtDetalle);
+                pedido.Total = CalcularMontoTotalPedido(DtDetalle);
+                pedidoBusiness.Carga(pedido);
+                MessageBox.Show("Pedido cargado correctamente");
+                this.Limpiar();
             }
             catch (Exception ex)
             {
