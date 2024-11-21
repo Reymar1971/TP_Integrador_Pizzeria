@@ -387,6 +387,7 @@
             BtnConfirmar.TabIndex = 10;
             BtnConfirmar.Text = "Confirmar";
             BtnConfirmar.UseVisualStyleBackColor = true;
+            BtnConfirmar.Click += BtnConfirmar_Click;
             // 
             // groupBox1
             // 

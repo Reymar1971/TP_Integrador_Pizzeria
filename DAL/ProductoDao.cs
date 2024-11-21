@@ -15,8 +15,6 @@ namespace DAL
 
         public static void Carga(Producto producto)
         {
-            SqlTransaction transaction = null;
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -27,7 +25,6 @@ namespace DAL
 
                     using (SqlCommand commandInserExp = new SqlCommand(insertQuery, conn))
                     {
-                        commandInserExp.Transaction = transaction;
                         commandInserExp.Parameters.AddWithValue("@IdCategoria", producto.TipoCategoria.IdCategoria);
                         commandInserExp.Parameters.AddWithValue("@Codigo", producto.Codigo);
                         commandInserExp.Parameters.AddWithValue("@Nombre", producto.Nombre);

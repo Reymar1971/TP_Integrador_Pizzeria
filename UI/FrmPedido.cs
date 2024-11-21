@@ -325,5 +325,19 @@ namespace UI
         {
             this.CalcularTotales();
         }
+
+        private void BtnConfirmar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Pedido pedido = new Pedido();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
