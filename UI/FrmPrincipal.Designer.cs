@@ -36,6 +36,7 @@
             categiriasToolStripMenuItem = new ToolStripMenuItem();
             productosToolStripMenuItem = new ToolStripMenuItem();
             consultasToolStripMenuItem = new ToolStripMenuItem();
+            InformeVentastoolStripMenuItem1 = new ToolStripMenuItem();
             salirToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -93,9 +94,17 @@
             // 
             // consultasToolStripMenuItem
             // 
+            consultasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { InformeVentastoolStripMenuItem1 });
             consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
             consultasToolStripMenuItem.Size = new Size(71, 20);
             consultasToolStripMenuItem.Text = "Consultas";
+            // 
+            // InformeVentastoolStripMenuItem1
+            // 
+            InformeVentastoolStripMenuItem1.Name = "InformeVentastoolStripMenuItem1";
+            InformeVentastoolStripMenuItem1.Size = new Size(180, 22);
+            InformeVentastoolStripMenuItem1.Text = "Informe de Ventas";
+            InformeVentastoolStripMenuItem1.Click += InformeVentastoolStripMenuItem1_Click;
             // 
             // salirToolStripMenuItem
             // 
@@ -133,5 +142,6 @@
         private ToolStripMenuItem productosToolStripMenuItem;
         private ToolStripMenuItem consultasToolStripMenuItem;
         private ToolStripMenuItem salirToolStripMenuItem;
+        private ToolStripMenuItem InformeVentastoolStripMenuItem1;
     }
 }

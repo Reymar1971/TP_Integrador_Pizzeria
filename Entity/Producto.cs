@@ -16,6 +16,7 @@ namespace Entity
         private Boolean estado;
         private Categoria tipoCategoria;
         private string descripcionCategoria;
+        private List<DetallePedido> detallePedido;
 
 
         public int IdProducto { get => idProducto; set => idProducto = value; }
@@ -26,5 +27,6 @@ namespace Entity
         public bool Estado { get => estado; set => estado = value; }
         public Categoria TipoCategoria { get => tipoCategoria; set => tipoCategoria = value; }
         public string DescripcionCategoria { get => tipoCategoria?.Nombre; }
+        internal List<DetallePedido> DetallePedido { get => detallePedido; set => detallePedido = value; }
     }
 }

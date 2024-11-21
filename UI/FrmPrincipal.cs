@@ -58,5 +58,12 @@ namespace UI
         {
             this.Close();
         }
+
+        private void InformeVentastoolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmInforme frmInforme = new FrmInforme();
+            frmInforme.MdiParent = this;
+            frmInforme.Show();
+        }
     }
 }

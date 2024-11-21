@@ -15,6 +15,7 @@ namespace Entity
         private string numeroComprobante;
         private DateTime fecha;
         private decimal total;
+        private List<DetallePedido> detallePedido;
         
         public int IdPedido { get => idPedido; set => idPedido = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
@@ -23,6 +24,6 @@ namespace Entity
         public string NumeroComprobante { get => NumeroComprobante; set => NumeroComprobante = value; }
         public DateTime Fecha { get => fecha; set => fecha = value; }
         public decimal Total { get => total; set => total = value; }
-        
+        internal List<DetallePedido> DetallePedido { get => detallePedido; set => detallePedido = value; }
     }
 }
