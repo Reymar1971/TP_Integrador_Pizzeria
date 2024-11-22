@@ -1,21 +1,15 @@
 ﻿using Entity;
 using Mapper;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
     public class ClienteDao
     {
+        // Carga clientes en l abase de datos
         public static void Carga(Cliente cliente)
         {
-            SqlTransaction transaction = null;
-
-            try
+           try
             {
                 using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
                 {
@@ -23,13 +17,13 @@ namespace DAL
 
                     string insertQuery = "INSERT INTO Clientes(NOMBREYAPELLIDO,DIRECCION,TELEFONO) VALUES(@Nombre, @Direccion,@Telefono)";
 
-                    using (SqlCommand commandInserExp = new SqlCommand(insertQuery, conn))
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
                     {
-                        commandInserExp.Transaction = transaction;
-                        commandInserExp.Parameters.AddWithValue("@Nombre", cliente.NombreApellido);
-                        commandInserExp.Parameters.AddWithValue("@Direccion", cliente.Direccion);
-                        commandInserExp.Parameters.AddWithValue("@Telefono", cliente.Telefono);
-                        commandInserExp.ExecuteNonQuery();
+
+                        cmd.Parameters.AddWithValue("@Nombre", cliente.NombreApellido);
+                        cmd.Parameters.AddWithValue("@Direccion", cliente.Direccion);
+                        cmd.Parameters.AddWithValue("@Telefono", cliente.Telefono);
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }
@@ -39,6 +33,7 @@ namespace DAL
             }
         }
 
+        // Actualiza modificaciones de los clientes en la base de datos
         public void Actualizar(int id, string nombre, string direccion, string telefono)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -63,6 +58,7 @@ namespace DAL
             }
         }
 
+        // Elimina un cliente en la base de datos
         public void Eliminar(int codigo)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -84,6 +80,7 @@ namespace DAL
             }
         }
 
+        // Lista todos los clientes de la base de datos
         public List<Cliente> Listar()
         {
             try
@@ -112,6 +109,7 @@ namespace DAL
             }
         }
 
+        // Busca un nombre o aproximacion en la base de datos
         public static List<Cliente> Buscar(string nombreCliente)
         {
             try
@@ -144,22 +142,40 @@ namespace DAL
             }
         }
 
-        public Cliente VerificoTelefono(string telefono)
+        // Verifica que no se cargen numeros de telefono duplicados
+        public bool VerificoTelefono(string codigo)
         {
-            using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+            try
             {
-                using (conn)
+                using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
                 {
                     conn.Open();
-                    string query = "SELECT * Clientes WHERE TELEFONO = @NumeroTelefono";
-                    SqlCommand command = new SqlCommand(query, conn);
-                    command.Parameters.AddWithValue("@NumeroTelefono", telefono);
-                }               
-                                
-            }
-            return null;
-        }
 
+                    string query = "SELECT * FROM Clientes WHERE TELEFONO = @NumeroTelefono";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@NumeroTelefono", codigo.Trim());
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return false;
+        }
+          
+        // Busca un cliente por su Id
         public Cliente GetById(int id)
         {
             try
@@ -187,6 +203,7 @@ namespace DAL
                 throw;
             }
         }
+
 
         // Los metodos de Activa y Desactiva se de dejan por alguna implementacion futura 
         public void Activar(int codigo)

@@ -1,11 +1,6 @@
 ﻿using Entity;
 using Mapper;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -49,6 +44,7 @@ namespace DAL
             }
         }
 
+        // Lista todos los pedidos de la base de datos
         public List<Pedido> Listar()
         {
             try
@@ -79,7 +75,8 @@ namespace DAL
                 throw;
             }
         }
-                
+        
+        // Elimina los pedidos en la base de datos
         public void EliminarPedido(int codigo)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -102,6 +99,7 @@ namespace DAL
             }
         }
 
+        // Elimina los detalles del pedido que se quiere eliminar 
         public void EliminarDetallePorPedido(int idPedido)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -126,6 +124,7 @@ namespace DAL
             }
         }
 
+        // Verifica el cliente en la gestion de Pedidos
         public static Cliente ObtenerClientePorTelefono(string numeroTelefono)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -146,6 +145,7 @@ namespace DAL
             return null;
         }
 
+        // Carga un pedido en la base de datos
         public void Carga(Pedido pedido)
         {
             try
@@ -179,6 +179,7 @@ namespace DAL
             }
         }
 
+        // Carga el datelle del pedido en la base de datos
         public void CargaDetalle(DetallePedido detallePedido, int idPedido)
         {
             try

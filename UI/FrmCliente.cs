@@ -1,14 +1,5 @@
 ﻿using BLL;
 using Entity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace UI
 {
@@ -22,6 +13,7 @@ namespace UI
             InitializeComponent();
         }
 
+        #region Metodos
         private void Listar()
         {
             try
@@ -85,7 +77,9 @@ namespace UI
             BtnEliminar.Visible = false;
             ChkSeleccionar.Checked = false;
         }
+        #endregion
 
+        #region Eventos Click
         private void DgvListado_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -271,7 +265,9 @@ namespace UI
             this.Listar();
             TxtBuscar.Text = null;
         }
+        #endregion
 
+        #region Para futura implementacion
         // Los metodos de Activa y Desactiva se de dejan por alguna implementacion futura 
         private void BtnActivar_Click(object sender, EventArgs e)
         {
@@ -330,7 +326,8 @@ namespace UI
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
 
-        
+
     }
 }

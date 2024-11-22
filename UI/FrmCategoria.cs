@@ -19,12 +19,13 @@ namespace UI
         private CategoriaBusiness categoriaBusiness = new CategoriaBusiness();
         private List<Categoria> borradorCategoria = new List<Categoria>();
 
-
+        
         public FrmCategoria()
         {
             InitializeComponent();
         }
 
+        #region Metodos 
         private void Listar()
         {
             try
@@ -88,8 +89,9 @@ namespace UI
             BtnEliminar.Visible = false;
             ChkSeleccionar.Checked = false;
         }
+        #endregion
 
-
+        #region Eventos Click
         private void FrmCategoria_Load(object sender, EventArgs e)
         {
             Listar();
@@ -328,7 +330,7 @@ namespace UI
                 BtnEliminar.Visible = false;
             }
         }
+        #endregion
 
-        
     }
 }

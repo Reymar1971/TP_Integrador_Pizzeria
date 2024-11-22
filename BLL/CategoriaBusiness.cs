@@ -13,6 +13,7 @@ namespace BLL
     {
         private CategoriaDao categoriaDao = new CategoriaDao();
 
+        // Valido y Cargo una categoria en la base de datos
         public void Carga(Categoria categoria)
         {
             using (var trx = new TransactionScope())
@@ -29,13 +30,17 @@ namespace BLL
 
                     // Verifico que el nombre de la cagoria ya este en la ingresada
                     string nomCategoria = categoria.Nombre;
-                    categoriaDao.VerificoNombre(nomCategoria);
-                    if (categoria != null)
+                    Boolean verifico = categoriaDao.VerificoNombre(nomCategoria.Trim());
+                    if (verifico)
                     {
-                        throw new Exception("La categoria ya existe !!!");
+                        throw new Exception("La Categoria ya extiste!!!");
+                        
                     }
-
-                    CategoriaDao.Carga(categoria);
+                    else
+                    {
+                        CategoriaDao.Carga(categoria);
+                    }
+                                        
                     trx.Complete();
 
                 }
@@ -47,6 +52,7 @@ namespace BLL
 
         }
 
+        // Valida y Carga una lista de categorias en la base de datos
         public void CargaVarios(List<Categoria> borradorCategoria)
         {
             try
@@ -67,6 +73,7 @@ namespace BLL
             }
         }
 
+        // Modifica una categoria
         public void Actualizar(int id, string nombre, string descripcion)
         {
             try
@@ -87,7 +94,8 @@ namespace BLL
                 throw;
             }
         }
-                
+        
+        // Elimina una categoria
         public void Eliminar(int codigo)
         {
             try
@@ -101,6 +109,7 @@ namespace BLL
             }
         }
 
+        //Lista todas las catgorias de la base de datos
         public List<Categoria> Listar()
         {
             try
@@ -113,6 +122,7 @@ namespace BLL
             }
         }
 
+        // Busca una categoria por su nombre o aproximacion en la base de datos
         public List<Categoria> Buscar(string text)
         {
             try
@@ -125,6 +135,7 @@ namespace BLL
             }
         }
 
+        // Activa una categoria
         public void Activar(int codigo)
         {
             try
@@ -138,6 +149,7 @@ namespace BLL
             }
         }
 
+        // desactiva una catgoria
         public void Desactivar(int codigo)
         {
             try

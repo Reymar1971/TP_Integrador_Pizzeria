@@ -11,7 +11,7 @@ namespace DAL
 {
     public class CategoriaDao
     {
-        
+        // Cargo una categoria en la base de datos
         public static void Carga(Categoria categoria)
         {
             SqlTransaction transaction = null;
@@ -39,6 +39,7 @@ namespace DAL
             }
         }
 
+        // Actualizo una modificacion de una categoria
         public void Actualizar(int id, string nombre, string descripcion)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -62,6 +63,7 @@ namespace DAL
             }
         }
 
+        // Elimono una categoria por si Id
         public void Eliminar(int codigo)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -83,6 +85,7 @@ namespace DAL
             }
         }
 
+        // Listo todas las categorias de la base de datos
         public List<Categoria> Listar()
         {
             try
@@ -111,6 +114,7 @@ namespace DAL
             }
         }
 
+        // Busca una categaria por el nombre o letras coincidentes
         public static List<Categoria> Buscar(string nombreCategoria)
         {
             try
@@ -143,6 +147,7 @@ namespace DAL
             }
         }
 
+        // Busca un categira por su Id
         public Categoria GetById(int id)
         {
             try
@@ -171,23 +176,40 @@ namespace DAL
             }
         }
 
-        public Categoria VerificoNombre(string nomCategoria)
+        // Verifico de no ingresar una categoria que ya esta en la base
+        public bool VerificoNombre(string nombre)
         {
-            using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+            try
             {
-                using (conn)
+                using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
                 {
                     conn.Open();
-                    string query = "SELECT * FROM Categoria WHERE NOMBRE = @Nombre";
-                    SqlCommand command = new SqlCommand(query, conn);
-                    command.Parameters.AddWithValue("@Nombre", nomCategoria);
-                    command.ExecuteNonQuery();
+
+                    string query = "SELECT ID_CATEGORIA, NOMBRE FROM Categoria WHERE NOMBRE = @Nombre";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Nombre", nombre.Trim());
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return true;
+                            }
+                        }
+                    }
                 }
-
             }
-            return null;
-        }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
+            return false;
+        }
+        
+        // Estado activo en las categorias
         public void Activar(int codigo)
         {
             SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());
@@ -213,6 +235,7 @@ namespace DAL
             }
         }
 
+        // Estado desactivo en las categorias
         public void Desactivar(int codigo)
         {
             SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());
@@ -225,7 +248,7 @@ namespace DAL
                     string insertQuery = "UPDATE Categoria SET ESTADO=0 WHERE ID_CATEGORIA=@IdCategoria";
                     using (SqlCommand command = new SqlCommand(insertQuery, conn))
                     {
-                        command.Parameters.AddWithValue("@IdOperario", codigo);
+                        command.Parameters.AddWithValue("@IdCategoria", codigo);
                         command.ExecuteNonQuery();
                     }
                 }

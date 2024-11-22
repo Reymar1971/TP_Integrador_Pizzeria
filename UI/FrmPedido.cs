@@ -1,15 +1,6 @@
 ﻿using BLL;
 using Entity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace UI
 {
@@ -25,35 +16,7 @@ namespace UI
             InitializeComponent();
         }
 
-        // Cueando doy click en los registros del listado de pedidos
-        private void DgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == DgvListado.Columns["Seleccionar"].Index)
-            {
-                DataGridViewCheckBoxCell chkEliminar = (DataGridViewCheckBoxCell)DgvListado.Rows[e.RowIndex].Cells["Seleccionar"];
-                chkEliminar.Value = !Convert.ToBoolean(chkEliminar.Value);
-            }
-        }
-
-        private void ChkSeleccionar_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (ChkSeleccionar.Checked)
-            {
-                DgvListado.Columns[0].Visible = true;
-                BtnActivar.Visible = true;
-                BtnDesactivar.Visible = true;
-                BtnEliminar.Visible = true;
-            }
-            else
-            {
-                DgvListado.Columns[0].Visible = false;
-                BtnActivar.Visible = false;
-                BtnDesactivar.Visible = false;
-                BtnEliminar.Visible = false;
-            }
-        }
-
+        #region Metodos
         // Formato a la grilla que muestra los pedidos generados
         private void Formato()
         {
@@ -308,7 +271,9 @@ namespace UI
             }
 
         }
+        #endregion
 
+        #region Eventos Click
         private void TxtTelefono_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -521,6 +486,35 @@ namespace UI
             }
         }
 
-        
+        // Cueando doy click en los registros del listado de pedidos
+        private void DgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == DgvListado.Columns["Seleccionar"].Index)
+            {
+                DataGridViewCheckBoxCell chkEliminar = (DataGridViewCheckBoxCell)DgvListado.Rows[e.RowIndex].Cells["Seleccionar"];
+                chkEliminar.Value = !Convert.ToBoolean(chkEliminar.Value);
+            }
+        }
+
+        private void ChkSeleccionar_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (ChkSeleccionar.Checked)
+            {
+                DgvListado.Columns[0].Visible = true;
+                BtnActivar.Visible = true;
+                BtnDesactivar.Visible = true;
+                BtnEliminar.Visible = true;
+            }
+            else
+            {
+                DgvListado.Columns[0].Visible = false;
+                BtnActivar.Visible = false;
+                BtnDesactivar.Visible = false;
+                BtnEliminar.Visible = false;
+            }
+        }
+        #endregion
+
     }
 }

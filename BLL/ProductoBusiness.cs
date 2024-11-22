@@ -1,10 +1,5 @@
 ﻿using DAL;
 using Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace BLL
@@ -13,6 +8,7 @@ namespace BLL
     {
         private ProductoDao productoDao = new ProductoDao();
 
+        // Se valida y se Carga de un producto 
         public void Carga(Producto producto)
         {
             using (var trx = new TransactionScope())
@@ -40,13 +36,16 @@ namespace BLL
                     }
                     // Verifico que el codio de producto no este usado
                     string codigo = producto.Codigo;
-                    productoDao.VerificoCodigo(codigo);
-                    if (codigo != null)
+                    Boolean verifico = productoDao.VerificoCodigo(codigo);
+                    if (verifico)
                     {
                         throw new Exception("Codigo de producto ya usado!!!");
                     }
-
-                    ProductoDao.Carga(producto); 
+                    else
+                    {
+                        ProductoDao.Carga(producto);
+                    }
+                    
                     trx.Complete();
 
                 }
@@ -58,6 +57,7 @@ namespace BLL
 
         }
 
+        // Se valida y se cargan una lista de productos
         public void CargaVarios(List<Producto> borradorProducto)
         {
             try
@@ -78,6 +78,7 @@ namespace BLL
             }
         }
 
+        // Se actualiza una modificacion de un producto
         public void Actualizar(int id, string codigo, string nombre, decimal precioVenta, int stock, int tipoCategoria)
         {
             try
@@ -111,6 +112,7 @@ namespace BLL
             }
         }
 
+        // Se elimina un producto
         public void Eliminar(int codigo)
         {
             try
@@ -124,6 +126,7 @@ namespace BLL
             }
         }
 
+        // Listado de todos los productos
         public List<Producto> Listar()
         {
             try
@@ -136,6 +139,7 @@ namespace BLL
             }
         }
 
+        // Busqueda de un producto por su nombre o aproximacion
         public List<Producto> Buscar(string text)
         {
             try
@@ -148,6 +152,7 @@ namespace BLL
             }
         }
 
+        // Borrado logico de un producto
         public void Activar(int codigo)
         {
             try
@@ -161,6 +166,7 @@ namespace BLL
             }
         }
 
+        // Desactiva el borrado logico de un producto
         public void Desactivar(int codigo)
         {
             try
@@ -173,7 +179,6 @@ namespace BLL
                 throw;
             }
         }
-
 
     }
 }

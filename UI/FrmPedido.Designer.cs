@@ -187,6 +187,7 @@
             // 
             DgvListado.AllowUserToAddRows = false;
             DgvListado.AllowUserToDeleteRows = false;
+            DgvListado.BackgroundColor = Color.AntiqueWhite;
             DgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvListado.Columns.AddRange(new DataGridViewColumn[] { Seleccionar });
             DgvListado.Location = new Point(12, 54);
@@ -363,6 +364,7 @@
             // DgvDetalle
             // 
             DgvDetalle.AllowUserToAddRows = false;
+            DgvDetalle.BackgroundColor = Color.AntiqueWhite;
             DgvDetalle.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvDetalle.Location = new Point(17, 44);
             DgvDetalle.Name = "DgvDetalle";

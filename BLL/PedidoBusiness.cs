@@ -1,10 +1,5 @@
 ﻿using DAL;
 using Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace BLL
@@ -18,6 +13,7 @@ namespace BLL
 
         PedidoDao pedidoDao = new PedidoDao();
 
+        // Lista los productos para armar un pedido
         public List<Producto> Buscar(string text)
         {
             try
@@ -30,6 +26,7 @@ namespace BLL
             }
         }
 
+        // Lista los pedidos generados
         public List<Pedido> Listar()
         {
             try
@@ -42,6 +39,7 @@ namespace BLL
             }
         }
 
+        // Elimina un pedido con su detalle
         public void Eliminar(int codigo)
         {
             try
@@ -55,17 +53,26 @@ namespace BLL
             }
         }
 
+        // Busca en la base de datos el cliente para el pedido
         public Cliente ObtenerClientePorTelefono(string numeroTelefono)
         {
             return PedidoDao.ObtenerClientePorTelefono(numeroTelefono);
         }
 
+        // Valida y carga el pedido 
         public void Carga(Pedido pedido)
         {
             using (var trx = new TransactionScope())
                 try
                 {
-
+                    if(pedido.Cliente == null)
+                    {
+                        throw new Exception("Falta ingresar el cliente");
+                    }
+                    if (pedido.Detalle == null)
+                    {
+                        throw new Exception("No ha ingresado porductos al pedido!!");
+                    }
                     if (pedido.Total == 0)
                     {
                         throw new Exception("El total del pedido no puede ser cero");

@@ -1,14 +1,5 @@
 ﻿using BLL;
 using Entity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace UI
 {
@@ -23,6 +14,7 @@ namespace UI
             InitializeComponent();
         }
 
+        #region Metodos
         private void CargoCombo()
         {
             try
@@ -112,7 +104,9 @@ namespace UI
             BtnEliminar.Visible = false;
             ChkSeleccionar.Checked = false;
         }
+        #endregion
 
+        #region Eventos Click
         private void FrmProducto_Load(object sender, EventArgs e)
         {
             Listar();
@@ -377,5 +371,6 @@ namespace UI
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
     }
 }

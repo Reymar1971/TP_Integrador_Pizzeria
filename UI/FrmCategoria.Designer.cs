@@ -273,6 +273,7 @@
             // 
             DgvListado.AllowUserToAddRows = false;
             DgvListado.AllowUserToDeleteRows = false;
+            DgvListado.BackgroundColor = Color.AntiqueWhite;
             DgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvListado.Columns.AddRange(new DataGridViewColumn[] { Seleccionar });
             DgvListado.Location = new Point(16, 54);

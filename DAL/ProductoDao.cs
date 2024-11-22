@@ -1,11 +1,6 @@
 ﻿using Entity;
 using Mapper;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -13,6 +8,7 @@ namespace DAL
     {
         private CategoriaDao categoriaDao = new CategoriaDao();
 
+        // Cargo un producto a la base de datos
         public static void Carga(Producto producto)
         {
             try
@@ -40,6 +36,7 @@ namespace DAL
             }
         }
 
+        // Actualizo una modificacion de un producto en la base de datos
         public void Actualizar(int id, int idCategoria, string codigo, string nombre, decimal precioVenta, int stock)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -66,6 +63,7 @@ namespace DAL
             }
         }
 
+        // Elimina un producto de la base de datos
         public void Eliminar(int codigo)
         {
             using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
@@ -87,6 +85,7 @@ namespace DAL
             }
         }
 
+        //Lista todos los productos de la base de datos
         public List<Producto> Listar()
         {
             try
@@ -118,6 +117,7 @@ namespace DAL
             }
         }
 
+        // Busca en la base de datos un producto por su nombre o aproximacion
         public static List<Producto> Buscar(string nombreProducto)
         {
             try
@@ -153,24 +153,40 @@ namespace DAL
             }
         }
 
-        public Producto VerificoCodigo(string codigo)
+        // Se verifica la carga duplicad de un codigo de producto
+        public bool VerificoCodigo(string codigo)
         {
-            using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+            try
             {
-                using (conn)
+                using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
                 {
                     conn.Open();
+
                     string query = "SELECT * FROM Productos WHERE CODIGO = @Codigo";
-                    SqlCommand command = new SqlCommand(query, conn);
-                    command.Parameters.AddWithValue("@Codigo", codigo);
-                    command.ExecuteNonQuery();
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Codigo", codigo.Trim());
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return true;
+                            }
+                        }
+                    }
                 }
-                
-                
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return false;
         }
 
+        // Borrado logico de un producto
         public void Activar(int codigo)
         {
             SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());
@@ -196,6 +212,7 @@ namespace DAL
             }
         }
 
+        // Desactivo el borrado logico de un producto
         public void Desactivar(int codigo)
         {
             SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());

@@ -1,10 +1,5 @@
 ﻿using DAL;
 using Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace BLL
@@ -13,6 +8,7 @@ namespace BLL
     {
         private ClienteDao clienteDao = new ClienteDao();
 
+        // Cargo un cliente en la base de datos
         public void Carga(Cliente cliente)
         {
             using (var trx = new TransactionScope())
@@ -32,13 +28,16 @@ namespace BLL
                     }
                     // Verifico que el telefono no se ingrese duplicado
                     string telefono = cliente.Telefono;
-                    clienteDao.VerificoTelefono(telefono);
-                    if (cliente != null)
+                    Boolean verifico= clienteDao.VerificoTelefono(telefono);
+                    if (verifico)
                     {
                         throw new Exception("El telefono ya esta registrado");
                     }
-
-                    ClienteDao.Carga(cliente);
+                    else
+                    {
+                        ClienteDao.Carga(cliente);
+                    }
+                                       
                     trx.Complete();
 
                 }
@@ -50,6 +49,7 @@ namespace BLL
 
         }
 
+        // Carga una lista de clientes en la base de datos
         public void CargaVarios(List<Cliente> borradorCliente)
         {
             try
@@ -70,6 +70,7 @@ namespace BLL
             }
         }
 
+        // Actualiza modificaciones de un ciente en la base de datos
         public void Actualizar(int id, string nombre, string direccion, string telefono)
         {
             try
@@ -95,6 +96,7 @@ namespace BLL
             }
         }
 
+        // Borra un cliente de la base de datos
         public void Eliminar(int codigo)
         {
             try
@@ -108,6 +110,7 @@ namespace BLL
             }
         }
 
+        // Lista todos los cientes de la base de datos
         public List<Cliente> Listar()
         {
             try
@@ -120,6 +123,7 @@ namespace BLL
             }
         }
 
+        // Busca por nombre o aproximacion un cliente en la dase de datos
         public List<Cliente> Buscar(string text)
         {
             try

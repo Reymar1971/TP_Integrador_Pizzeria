@@ -63,6 +63,7 @@
             // 
             DgvListado.AllowUserToAddRows = false;
             DgvListado.AllowUserToDeleteRows = false;
+            DgvListado.BackgroundColor = Color.AntiqueWhite;
             DgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvListado.Columns.AddRange(new DataGridViewColumn[] { Seleccionar });
             DgvListado.Location = new Point(16, 54);
@@ -118,7 +119,7 @@
             // 
             // TxtDireccion
             // 
-            TxtDireccion.Location = new Point(76, 74);
+            TxtDireccion.Location = new Point(79, 153);
             TxtDireccion.Name = "TxtDireccion";
             TxtDireccion.Size = new Size(312, 23);
             TxtDireccion.TabIndex = 11;
@@ -133,9 +134,9 @@
             // 
             // TxtNombre
             // 
-            TxtNombre.Location = new Point(141, 24);
+            TxtNombre.Location = new Point(133, 98);
             TxtNombre.Name = "TxtNombre";
-            TxtNombre.Size = new Size(247, 23);
+            TxtNombre.Size = new Size(258, 23);
             TxtNombre.TabIndex = 3;
             // 
             // BtnCancelar
@@ -151,7 +152,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(14, 32);
+            label1.Location = new Point(17, 106);
             label1.Name = "label1";
             label1.Size = new Size(110, 15);
             label1.TabIndex = 0;
@@ -213,7 +214,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(14, 82);
+            label2.Location = new Point(17, 161);
             label2.Name = "label2";
             label2.Size = new Size(56, 15);
             label2.TabIndex = 1;
@@ -291,15 +292,15 @@
             // 
             // TxtTelefono
             // 
-            TxtTelefono.Location = new Point(76, 125);
+            TxtTelefono.Location = new Point(125, 47);
             TxtTelefono.Name = "TxtTelefono";
-            TxtTelefono.Size = new Size(312, 23);
+            TxtTelefono.Size = new Size(266, 23);
             TxtTelefono.TabIndex = 14;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(14, 133);
+            label3.Location = new Point(17, 55);
             label3.Name = "label3";
             label3.Size = new Size(55, 15);
             label3.TabIndex = 13;
