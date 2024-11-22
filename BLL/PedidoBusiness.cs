@@ -30,6 +30,18 @@ namespace BLL
             }
         }
 
+        public List<Pedido> Listar()
+        {
+            try
+            {
+                return pedidoDao.Listar();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public Cliente ObtenerClientePorTelefono(string numeroTelefono)
         {
             return PedidoDao.ObtenerClientePorTelefono(numeroTelefono);

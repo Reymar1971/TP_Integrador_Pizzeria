@@ -11,6 +11,7 @@ namespace DAL
 {
     public class PedidoDao
     {
+        private ClienteDao clienteDao = new ClienteDao();
 
         // Este procedimiento no lista los productos que tengan stock en cero
         public static List<Producto> Buscar(string nombreProducto)
@@ -41,6 +42,37 @@ namespace DAL
                     }
                 }
                 return productos;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<Pedido> Listar()
+        {
+            try
+            {
+                List<Pedido> pedidos = new List<Pedido>();
+                using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+                {
+                    conn.Open();
+                    string query = "SELECT ID_PEDIDO,ID_CLIENTE,CANTIDAD,FECHA,TOTAL FROM Pedidos";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int idCliente = Convert.ToInt32(reader["ID_CLIENTE"].ToString());
+                                Cliente cliente = clienteDao.GetById(idCliente);
+                                Pedido pedido = PedidoMapper.Map(reader, cliente);
+                                pedidos.Add(pedido);
+                            }
+                        }
+                    }
+                }
+                return pedidos;
             }
             catch (Exception ex)
             {

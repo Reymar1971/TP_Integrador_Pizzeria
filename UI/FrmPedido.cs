@@ -25,6 +25,46 @@ namespace UI
             InitializeComponent();
         }
 
+        // Formato a la grilla que muestra los pedidos generados
+        private void Formato()
+        {
+            DgvListado.Columns[0].Visible = false;
+            DgvListado.Columns[1].Width = 80;
+            DgvListado.Columns[1].HeaderText = "Pedido Nro.";
+            DgvListado.Columns[2].Visible = false;
+            DgvListado.Columns[3].Width = 150;
+            DgvListado.Columns[3].HeaderText = "Cliente";
+            DgvListado.Columns[4].Width = 100;
+            DgvListado.Columns[4].HeaderText = "Nro.Teléfono";
+            DgvListado.Columns[5].Width = 80;
+            DgvListado.Columns[5].HeaderText = "Cantidad";
+            DgvListado.Columns[6].Width = 100;
+            DgvListado.Columns[6].HeaderText = "Fecha";
+            DgvListado.Columns[7].Width = 100;
+            DgvListado.Columns[7].HeaderText = "Total";
+        }
+
+        // Lista los pedidos generados 
+        private void Listar()
+        {
+            try
+            {
+                //cambio color alternando las filas de la grilla
+                this.DgvListado.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkOrange;
+                DgvListado.DataSource = pedidoBusiness.Listar();
+                this.Formato();
+                //this.Limpiar();
+                LblTotal.Text = "Total de registros: " + Convert.ToString(DgvListado.Rows.Count);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        // Procedimientos que afectan a la generacion de los pedidos
         private void Limpiar()
         {
             TxtId.Clear();
@@ -173,6 +213,7 @@ namespace UI
             TabGeneral.SelectedIndex = 1;
             this.CrearTabla();
             TxtCostoEnvio.Enabled = false;
+            this.Listar();
         }
 
         private void FormatoProductos()
@@ -413,6 +454,7 @@ namespace UI
                 pedidoBusiness.Carga(pedido);
                 MessageBox.Show("Pedido cargado correctamente");
                 this.Limpiar();
+                this.Listar();
             }
             catch (Exception ex)
             {

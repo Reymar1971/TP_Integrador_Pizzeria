@@ -167,7 +167,7 @@
             // 
             // TxtBuscarPedido
             // 
-            TxtBuscarPedido.Location = new Point(16, 19);
+            TxtBuscarPedido.Location = new Point(14, 19);
             TxtBuscarPedido.Name = "TxtBuscarPedido";
             TxtBuscarPedido.Size = new Size(367, 23);
             TxtBuscarPedido.TabIndex = 6;
@@ -187,10 +187,10 @@
             DgvListado.AllowUserToDeleteRows = false;
             DgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvListado.Columns.AddRange(new DataGridViewColumn[] { Seleccionar });
-            DgvListado.Location = new Point(16, 54);
+            DgvListado.Location = new Point(12, 54);
             DgvListado.Name = "DgvListado";
             DgvListado.ReadOnly = true;
-            DgvListado.Size = new Size(721, 316);
+            DgvListado.Size = new Size(770, 316);
             DgvListado.TabIndex = 4;
             // 
             // Seleccionar
@@ -208,7 +208,7 @@
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(792, 495);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "Mantenimiento";
+            tabPage2.Text = "Pedidos";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox2

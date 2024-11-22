@@ -21,5 +21,18 @@ namespace Mapper
             return cliente;
         }
 
+        public static Pedido Map(SqlDataReader reader, Cliente cliente)
+        {
+            Pedido pedido = new Pedido
+            {
+                IdPedido = Convert.ToInt32(reader["ID_PEDIDO"].ToString()),
+                Cantidad = Convert.ToInt32(reader["CANTIDAD"].ToString()),
+                Fecha = Convert.ToDateTime(reader["FECHA"].ToString()),
+                Total = Convert.ToDecimal(reader["TOTAL"].ToString()),
+                Cliente = cliente
+            };
+            return pedido;
+
+        }
     }
 }

@@ -160,6 +160,34 @@ namespace DAL
             return null;
         }
 
+        public Cliente GetById(int id)
+        {
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(BDConfiguracion.getConectionBD()))
+                {
+                    conection.Open();
+                    string query = "Select ID_CLIENTE,NOMBREYAPELLIDO,DIRECCION,TELEFONO FROM Clientes WHERE ID_CLIENTE = @ID";
+                    using (SqlCommand sqlCommand = new SqlCommand(query, conection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@ID", id);
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                return ClienteMapper.Map(reader);
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         // Los metodos de Activa y Desactiva se de dejan por alguna implementacion futura 
         public void Activar(int codigo)
         {
