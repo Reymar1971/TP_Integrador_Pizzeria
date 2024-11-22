@@ -11,6 +11,11 @@ namespace BLL
 {
     public class PedidoBusiness
     {
+        static PedidoBusiness()
+        {
+            TransactionManager.ImplicitDistributedTransactions = true;
+        }
+
         PedidoDao pedidoDao = new PedidoDao();
 
         public List<Producto> Buscar(string text)
@@ -32,17 +37,17 @@ namespace BLL
 
         public void Carga(Pedido pedido)
         {
-            //using (var trx = new TransactionScope())
+            using (var trx = new TransactionScope())
                 try
                 {
-                    
+
                     if (pedido.Total == 0)
                     {
                         throw new Exception("El total del pedido no puede ser cero");
                     }
                     pedidoDao.Carga(pedido);
-                    
-                    //trx.Complete();
+
+                    trx.Complete();
 
                 }
                 catch (Exception ex)
@@ -52,6 +57,6 @@ namespace BLL
                 }
 
         }
-                
+
     }
 }

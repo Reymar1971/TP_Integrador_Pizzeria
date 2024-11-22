@@ -29,6 +29,9 @@ namespace UI
         {
             try
             {
+                //cambio color alternando las filas de la grilla
+                this.DgvListado.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkOrange;
+
                 DgvListado.DataSource = categoriaBusiness.Listar();
                 this.Formato();
                 this.Limpiar();

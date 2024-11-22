@@ -26,6 +26,8 @@ namespace UI
         {
             try
             {
+                //cambio color alternando las filas de la grilla
+                this.DgvListado.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkOrange;
                 DgvListado.DataSource = clienteBusiness.Listar();
                 this.Formato();
                 this.Limpiar();
@@ -43,9 +45,9 @@ namespace UI
         {
             DgvListado.Columns[0].Visible = false;
             DgvListado.Columns[1].Visible = false;
-            DgvListado.Columns[2].Width = 110;
+            DgvListado.Columns[2].Width = 200;
             DgvListado.Columns[2].HeaderText = "Nombre y Apellido";
-            DgvListado.Columns[3].Width = 450;
+            DgvListado.Columns[3].Width = 350;
             DgvListado.Columns[3].HeaderText = "Dirección";
             DgvListado.Columns[4].Width = 100;
             DgvListado.Columns[4].HeaderText = "Teléfono";

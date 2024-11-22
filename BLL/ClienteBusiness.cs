@@ -30,7 +30,15 @@ namespace BLL
                     {
                         throw new Exception("Falta ingresar número de teléfono");
                     }
-                    ClienteDao.Carga(cliente); // Changed to static call
+                    // Verifico que el telefono no se ingrese duplicado
+                    string telefono = cliente.Telefono;
+                    clienteDao.VerificoTelefono(telefono);
+                    if (cliente != null)
+                    {
+                        throw new Exception("El telefono ya esta registrado");
+                    }
+
+                    ClienteDao.Carga(cliente);
                     trx.Complete();
 
                 }

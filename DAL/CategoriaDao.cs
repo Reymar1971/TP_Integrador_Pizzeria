@@ -172,6 +172,22 @@ namespace DAL
             }
         }
 
+        public Categoria VerificoNombre(string nomCategoria)
+        {
+            using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Categoria WHERE NOMBRE = @Nombre";
+                    SqlCommand command = new SqlCommand(query, conn);
+                    command.Parameters.AddWithValue("@Nombre", nomCategoria);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            return null;
+        }
 
         public void Activar(int codigo)
         {
@@ -222,5 +238,7 @@ namespace DAL
                 throw;
             }
         }
+
+        
     }
 }

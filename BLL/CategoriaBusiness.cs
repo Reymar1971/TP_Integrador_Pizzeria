@@ -27,7 +27,15 @@ namespace BLL
                         throw new Exception("Falta ingresar descripcion");
                     }
 
-                    CategoriaDao.Carga(categoria); // Changed to static call
+                    // Verifico que el nombre de la cagoria ya este en la ingresada
+                    string nomCategoria = categoria.Nombre;
+                    categoriaDao.VerificoNombre(nomCategoria);
+                    if (categoria != null)
+                    {
+                        throw new Exception("La categoria ya existe !!!");
+                    }
+
+                    CategoriaDao.Carga(categoria);
                     trx.Complete();
 
                 }

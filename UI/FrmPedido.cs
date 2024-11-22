@@ -89,6 +89,8 @@ namespace UI
             this.DtDetalle.Columns.Add("stock", Type.GetType("System.Int32"));
             this.DtDetalle.Columns.Add("importe", Type.GetType("System.Decimal"));
 
+            //cambio color alternando las filas de la grilla
+            this.DgvDetalle.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkOrange;
             DgvDetalle.DataSource = this.DtDetalle;
 
             DgvDetalle.Columns[0].Visible = false;
@@ -175,6 +177,8 @@ namespace UI
 
         private void FormatoProductos()
         {
+            //cambio color alternando las filas de la grilla
+            this.DgvProductos.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkOrange;
             DgvProductos.Columns[0].Visible = false;
             DgvProductos.Columns[1].Width = 120;
             DgvProductos.Columns[1].HeaderText = "Código";

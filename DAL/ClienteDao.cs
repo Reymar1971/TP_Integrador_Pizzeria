@@ -70,7 +70,7 @@ namespace DAL
                 try
                 {
                     conn.Open();
-                    string insertQuery = "DELETE FROM CLIENTE WHERE ID_CLIENTE = @codigo";
+                    string insertQuery = "DELETE FROM CLIENTES WHERE ID_CLIENTE = @codigo";
                     using (SqlCommand command = new SqlCommand(insertQuery, conn))
                     {
                         command.Parameters.AddWithValue("@codigo", codigo);
@@ -144,6 +144,22 @@ namespace DAL
             }
         }
 
+        public Cliente VerificoTelefono(string telefono)
+        {
+            using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    string query = "SELECT * Clientes WHERE TELEFONO = @NumeroTelefono";
+                    SqlCommand command = new SqlCommand(query, conn);
+                    command.Parameters.AddWithValue("@NumeroTelefono", telefono);
+                }               
+                                
+            }
+            return null;
+        }
+
         // Los metodos de Activa y Desactiva se de dejan por alguna implementacion futura 
         public void Activar(int codigo)
         {
@@ -194,6 +210,7 @@ namespace DAL
                 throw;
             }
         }
-                
+
+        
     }
 }

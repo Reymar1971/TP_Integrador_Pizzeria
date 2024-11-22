@@ -153,6 +153,24 @@ namespace DAL
             }
         }
 
+        public Producto VerificoCodigo(string codigo)
+        {
+            using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+            {
+                using (conn)
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Productos WHERE CODIGO = @Codigo";
+                    SqlCommand command = new SqlCommand(query, conn);
+                    command.Parameters.AddWithValue("@Codigo", codigo);
+                    command.ExecuteNonQuery();
+                }
+                
+                
+            }
+            return null;
+        }
+
         public void Activar(int codigo)
         {
             SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD());
@@ -203,5 +221,6 @@ namespace DAL
             }
         }
 
+        
     }
 }

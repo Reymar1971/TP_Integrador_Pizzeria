@@ -44,6 +44,8 @@ namespace UI
         {
             try
             {
+                //cambio color alternando las filas de la grilla
+                this.DgvListado.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkOrange;
                 DgvListado.DataSource = productoBusiness.Listar();
                 this.Formato();
                 this.Limpiar();
@@ -63,16 +65,16 @@ namespace UI
             DgvListado.Columns[1].Visible = false;
             DgvListado.Columns[2].Width = 100;
             DgvListado.Columns[2].HeaderText = "Código";
-            DgvListado.Columns[3].Width = 150;
+            DgvListado.Columns[3].Width = 210;
             DgvListado.Columns[3].HeaderText = "Nombre";
             DgvListado.Columns[4].Width = 100;
             DgvListado.Columns[4].HeaderText = "Precio Venta";
-            DgvListado.Columns[5].Width = 80;
+            DgvListado.Columns[5].Width = 50;
             DgvListado.Columns[5].HeaderText = "Stock";
             DgvListado.Columns[6].Width = 80;
             DgvListado.Columns[6].HeaderText = "Estado";
             DgvListado.Columns[7].Visible = false;
-            DgvListado.Columns[8].Width = 150;
+            DgvListado.Columns[8].Width = 130;
             DgvListado.Columns[8].HeaderText = "Categoría";
         }
 

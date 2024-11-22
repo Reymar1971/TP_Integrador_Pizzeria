@@ -38,7 +38,15 @@ namespace BLL
                     {
                         throw new Exception("Falta ingresar Categoría");
                     }
-                    ProductoDao.Carga(producto); // Changed to static call
+                    // Verifico que el codio de producto no este usado
+                    string codigo = producto.Codigo;
+                    productoDao.VerificoCodigo(codigo);
+                    if (codigo != null)
+                    {
+                        throw new Exception("Codigo de producto ya usado!!!");
+                    }
+
+                    ProductoDao.Carga(producto); 
                     trx.Complete();
 
                 }
