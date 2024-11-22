@@ -42,6 +42,19 @@ namespace BLL
             }
         }
 
+        public void Eliminar(int codigo)
+        {
+            try
+            {
+                pedidoDao.EliminarDetallePorPedido(codigo);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         public Cliente ObtenerClientePorTelefono(string numeroTelefono)
         {
             return PedidoDao.ObtenerClientePorTelefono(numeroTelefono);

@@ -79,6 +79,52 @@ namespace DAL
                 throw;
             }
         }
+                
+        public void EliminarPedido(int codigo)
+        {
+            using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+            {
+                try
+                {
+                    conn.Open();
+                    string deleteQuery = "DELETE FROM Pedidos WHERE ID_PEDIDO = @codigo";
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@codigo", codigo);
+                        cmd.ExecuteNonQuery();
+                    }
+                                       
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public void EliminarDetallePorPedido(int idPedido)
+        {
+            using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+            {
+                try
+                {
+                    conn.Open();
+                    string deleteQuery = "DELETE FROM Detalle_Pedido WHERE ID_PEDIDO = @idPedido";
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@idPedido", idPedido);
+                        cmd.ExecuteNonQuery();
+
+                        // Eliminar el pedido
+                        EliminarPedido(idPedido);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
 
         public static Cliente ObtenerClientePorTelefono(string numeroTelefono)
         {

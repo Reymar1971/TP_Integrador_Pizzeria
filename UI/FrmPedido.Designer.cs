@@ -125,6 +125,7 @@
             BtnEliminar.TabIndex = 11;
             BtnEliminar.Text = "Eliminar";
             BtnEliminar.UseVisualStyleBackColor = true;
+            BtnEliminar.Click += BtnEliminar_Click;
             // 
             // BtnDesactivar
             // 
@@ -155,6 +156,7 @@
             ChkSeleccionar.TabIndex = 8;
             ChkSeleccionar.Text = "Seleccionar";
             ChkSeleccionar.UseVisualStyleBackColor = true;
+            ChkSeleccionar.CheckedChanged += ChkSeleccionar_CheckedChanged;
             // 
             // BtnBuscarPedido
             // 
@@ -192,6 +194,7 @@
             DgvListado.ReadOnly = true;
             DgvListado.Size = new Size(770, 316);
             DgvListado.TabIndex = 4;
+            DgvListado.CellContentClick += DgvListado_CellContentClick;
             // 
             // Seleccionar
             // 
