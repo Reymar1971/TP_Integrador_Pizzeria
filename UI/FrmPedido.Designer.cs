@@ -58,10 +58,10 @@
             BtnCancelar = new Button();
             BtnConfirmar = new Button();
             groupBox1 = new GroupBox();
+            TxtBuscar = new MaskedTextBox();
             BtnCancelaCliente = new Button();
             BtncargaCliente = new Button();
             label4 = new Label();
-            TxtBuscar = new TextBox();
             label3 = new Label();
             TxtDireccion = new TextBox();
             TxtId = new TextBox();
@@ -396,10 +396,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(TxtBuscar);
             groupBox1.Controls.Add(BtnCancelaCliente);
             groupBox1.Controls.Add(BtncargaCliente);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(TxtBuscar);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(TxtDireccion);
             groupBox1.Controls.Add(TxtId);
@@ -412,6 +412,16 @@
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
             groupBox1.Text = "Cliente";
+            // 
+            // TxtBuscar
+            // 
+            TxtBuscar.BackColor = SystemColors.Info;
+            TxtBuscar.Location = new Point(127, 28);
+            TxtBuscar.Mask = "0000000000";
+            TxtBuscar.Name = "TxtBuscar";
+            TxtBuscar.Size = new Size(116, 23);
+            TxtBuscar.TabIndex = 18;
+            TxtBuscar.KeyDown += TxtBuscar_KeyDown;
             // 
             // BtnCancelaCliente
             // 
@@ -441,14 +451,6 @@
             label4.Size = new Size(21, 15);
             label4.TabIndex = 15;
             label4.Text = "ID:";
-            // 
-            // TxtBuscar
-            // 
-            TxtBuscar.Location = new Point(177, 28);
-            TxtBuscar.Name = "TxtBuscar";
-            TxtBuscar.Size = new Size(197, 23);
-            TxtBuscar.TabIndex = 14;
-            TxtBuscar.KeyDown += TxtTelefono_KeyDown;
             // 
             // label3
             // 
@@ -539,7 +541,6 @@
         private DataGridViewCheckBoxColumn Seleccionar;
         private TabPage tabPage2;
         private GroupBox groupBox1;
-        private TextBox TxtBuscar;
         private Label label3;
         private TextBox TxtDireccion;
         private Button BtnConfirmar;
@@ -565,5 +566,6 @@
         private Panel PanelProductos;
         private DataGridView DgvProductos;
         private Button BtnCerrarPanel;
+        private MaskedTextBox TxtBuscar;
     }
 }

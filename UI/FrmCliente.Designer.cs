@@ -50,7 +50,7 @@
             BtnEliminar = new Button();
             LblTotal = new Label();
             tabPage2 = new TabPage();
-            TxtTelefono = new TextBox();
+            TxtTelefono = new MaskedTextBox();
             label3 = new Label();
             TabGeneral = new TabControl();
             ((System.ComponentModel.ISupportInitialize)DgvListado).BeginInit();
@@ -292,10 +292,11 @@
             // 
             // TxtTelefono
             // 
-            TxtTelefono.Location = new Point(125, 47);
+            TxtTelefono.Location = new Point(133, 52);
+            TxtTelefono.Mask = "0000000000";
             TxtTelefono.Name = "TxtTelefono";
-            TxtTelefono.Size = new Size(266, 23);
-            TxtTelefono.TabIndex = 14;
+            TxtTelefono.Size = new Size(88, 23);
+            TxtTelefono.TabIndex = 15;
             // 
             // label3
             // 
@@ -359,7 +360,7 @@
         private Label LblTotal;
         private TabPage tabPage2;
         private TabControl TabGeneral;
-        private TextBox TxtTelefono;
         private Label label3;
+        private MaskedTextBox TxtTelefono;
     }
 }

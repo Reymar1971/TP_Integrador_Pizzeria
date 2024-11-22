@@ -274,6 +274,25 @@ namespace UI
         #endregion
 
         #region Eventos Click
+
+        private void TxtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    VerificarYActualizarCliente();
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void TxtTelefono_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -515,6 +534,6 @@ namespace UI
             }
         }
         #endregion
-
+                
     }
 }
