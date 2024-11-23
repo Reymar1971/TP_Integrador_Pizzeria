@@ -30,13 +30,10 @@
         {
             TabGeneral = new TabControl();
             tabPage1 = new TabPage();
-            BtnCancelaBuscar = new Button();
             BtnEliminar = new Button();
             BtnDesactivar = new Button();
             BtnActivar = new Button();
             ChkSeleccionar = new CheckBox();
-            BtnBuscarPedido = new Button();
-            TxtBuscarPedido = new TextBox();
             LblTotal = new Label();
             DgvListado = new DataGridView();
             Seleccionar = new DataGridViewCheckBoxColumn();
@@ -91,13 +88,10 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(BtnCancelaBuscar);
             tabPage1.Controls.Add(BtnEliminar);
             tabPage1.Controls.Add(BtnDesactivar);
             tabPage1.Controls.Add(BtnActivar);
             tabPage1.Controls.Add(ChkSeleccionar);
-            tabPage1.Controls.Add(BtnBuscarPedido);
-            tabPage1.Controls.Add(TxtBuscarPedido);
             tabPage1.Controls.Add(LblTotal);
             tabPage1.Controls.Add(DgvListado);
             tabPage1.Location = new Point(4, 24);
@@ -108,18 +102,9 @@
             tabPage1.Text = "Listado";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // BtnCancelaBuscar
-            // 
-            BtnCancelaBuscar.Location = new Point(488, 19);
-            BtnCancelaBuscar.Name = "BtnCancelaBuscar";
-            BtnCancelaBuscar.Size = new Size(118, 23);
-            BtnCancelaBuscar.TabIndex = 12;
-            BtnCancelaBuscar.Text = "Cancela Busqueda";
-            BtnCancelaBuscar.UseVisualStyleBackColor = true;
-            // 
             // BtnEliminar
             // 
-            BtnEliminar.Location = new Point(373, 386);
+            BtnEliminar.Location = new Point(370, 420);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(75, 23);
             BtnEliminar.TabIndex = 11;
@@ -130,7 +115,7 @@
             // BtnDesactivar
             // 
             BtnDesactivar.Enabled = false;
-            BtnDesactivar.Location = new Point(257, 386);
+            BtnDesactivar.Location = new Point(254, 420);
             BtnDesactivar.Name = "BtnDesactivar";
             BtnDesactivar.Size = new Size(75, 23);
             BtnDesactivar.TabIndex = 10;
@@ -140,7 +125,7 @@
             // BtnActivar
             // 
             BtnActivar.Enabled = false;
-            BtnActivar.Location = new Point(144, 385);
+            BtnActivar.Location = new Point(141, 419);
             BtnActivar.Name = "BtnActivar";
             BtnActivar.Size = new Size(75, 23);
             BtnActivar.TabIndex = 9;
@@ -150,7 +135,7 @@
             // ChkSeleccionar
             // 
             ChkSeleccionar.AutoSize = true;
-            ChkSeleccionar.Location = new Point(25, 398);
+            ChkSeleccionar.Location = new Point(22, 432);
             ChkSeleccionar.Name = "ChkSeleccionar";
             ChkSeleccionar.Size = new Size(86, 19);
             ChkSeleccionar.TabIndex = 8;
@@ -158,26 +143,10 @@
             ChkSeleccionar.UseVisualStyleBackColor = true;
             ChkSeleccionar.CheckedChanged += ChkSeleccionar_CheckedChanged;
             // 
-            // BtnBuscarPedido
-            // 
-            BtnBuscarPedido.Location = new Point(398, 19);
-            BtnBuscarPedido.Name = "BtnBuscarPedido";
-            BtnBuscarPedido.Size = new Size(75, 23);
-            BtnBuscarPedido.TabIndex = 7;
-            BtnBuscarPedido.Text = "Buscar";
-            BtnBuscarPedido.UseVisualStyleBackColor = true;
-            // 
-            // TxtBuscarPedido
-            // 
-            TxtBuscarPedido.Location = new Point(14, 19);
-            TxtBuscarPedido.Name = "TxtBuscarPedido";
-            TxtBuscarPedido.Size = new Size(367, 23);
-            TxtBuscarPedido.TabIndex = 6;
-            // 
             // LblTotal
             // 
             LblTotal.AutoSize = true;
-            LblTotal.Location = new Point(570, 401);
+            LblTotal.Location = new Point(567, 435);
             LblTotal.Name = "LblTotal";
             LblTotal.Size = new Size(32, 15);
             LblTotal.TabIndex = 5;
@@ -190,10 +159,10 @@
             DgvListado.BackgroundColor = Color.AntiqueWhite;
             DgvListado.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvListado.Columns.AddRange(new DataGridViewColumn[] { Seleccionar });
-            DgvListado.Location = new Point(12, 54);
+            DgvListado.Location = new Point(12, 22);
             DgvListado.Name = "DgvListado";
             DgvListado.ReadOnly = true;
-            DgvListado.Size = new Size(770, 316);
+            DgvListado.Size = new Size(770, 375);
             DgvListado.TabIndex = 4;
             DgvListado.CellContentClick += DgvListado_CellContentClick;
             DgvListado.CellContentDoubleClick += DgvListado_CellContentDoubleClick;
@@ -530,13 +499,10 @@
 
         private TabControl TabGeneral;
         private TabPage tabPage1;
-        private Button BtnCancelaBuscar;
         private Button BtnEliminar;
         private Button BtnDesactivar;
         private Button BtnActivar;
         private CheckBox ChkSeleccionar;
-        private Button BtnBuscarPedido;
-        private TextBox TxtBuscarPedido;
         private Label LblTotal;
         private DataGridView DgvListado;
         private DataGridViewCheckBoxColumn Seleccionar;

@@ -553,7 +553,6 @@ namespace UI
                 BtnEliminar.Visible = false;
             }
         }
-        #endregion
 
         private void DgvListado_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -563,5 +562,8 @@ namespace UI
                 MostrarDetallePedido(pedidoId);
             }
         }
+        #endregion
+
+
     }
 }

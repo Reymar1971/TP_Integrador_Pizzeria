@@ -35,6 +35,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BackColor = Color.AntiqueWhite;
             ClientSize = new Size(566, 165);
             Name = "FrmDetallePedido";
             Text = "Detalle del Pedido";

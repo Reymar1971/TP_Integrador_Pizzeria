@@ -238,6 +238,7 @@ namespace DAL
             }
         }
 
+        // Busco un producto por su Id
         public Producto GetById(int idProducto)
         {
             try

@@ -8,7 +8,7 @@ namespace DAL
     {
         private ClienteDao clienteDao = new ClienteDao();
 
-        // Este procedimiento no lista los productos que tengan stock en cero
+        // Este procedimiento lista los productos, pero no los que tengan stock en cero o esten es Estado desactivado.
         public static List<Producto> Buscar(string nombreProducto)
         {
             try
@@ -18,7 +18,7 @@ namespace DAL
                 using (conn)
                 {
                     conn.Open();
-                    string query = "SELECT ID_PRODUCTO,ID_CATEGORIA,CODIGO,NOMBRE,PRECIO_VENTA,STOCK,ESTADO FROM Productos WHERE NOMBRE LIKE '%' + @nombreProducto + '%' AND STOCK > 0";
+                    string query = "SELECT ID_PRODUCTO,ID_CATEGORIA,CODIGO,NOMBRE,PRECIO_VENTA,STOCK,ESTADO FROM Productos WHERE NOMBRE LIKE '%' + @nombreProducto + '%' AND STOCK > 0 AND ESTADO = 1";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@nombreProducto", nombreProducto);
@@ -205,7 +205,6 @@ namespace DAL
                 throw;
             }
         }
-
-        
+                
     }
 }

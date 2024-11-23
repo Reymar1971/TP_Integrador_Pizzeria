@@ -1,11 +1,6 @@
 ﻿using Entity;
 using Mapper;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -13,6 +8,7 @@ namespace DAL
     {
         private ProductoDao productoDao = new ProductoDao();
 
+        // Obtengo el detalle de un pedido de la base de datos por su Id de pedido
         public List<DetallePedido> ObtenerDetallePedidoPorId(int pedidoId)
         {
             List<DetallePedido> detalles = new List<DetallePedido>();
