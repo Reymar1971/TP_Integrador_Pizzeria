@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 
 namespace DAL
 {
-    public  class ProductoDao
+    public class ProductoDao
     {
         private CategoriaDao categoriaDao = new CategoriaDao();
 
@@ -238,6 +238,36 @@ namespace DAL
             }
         }
 
-        
+        public Producto GetById(int idProducto)
+        {
+            try
+            {
+                using (SqlConnection conection = new SqlConnection(BDConfiguracion.getConectionBD()))
+                {
+                    conection.Open();
+                    string query = "Select ID_PRODUCTO,ID_CATEGORIA,CODIGO,NOMBRE,PRECIO_VENTA,STOCK,ESTADO FROM Productos WHERE ID_PRODUCTO = @ID";
+                    using (SqlCommand sqlCommand = new SqlCommand(query, conection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@ID", idProducto);
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            Producto producto = null;
+                            while (reader.Read())
+                            {
+                                int idCategoria = Convert.ToInt32(reader["ID_CATEGORIA"].ToString());
+                                Categoria categoria = categoriaDao.GetById(idCategoria);
+                                producto = ProductoMapper.Map(reader, categoria);
+                            }
+                            return producto;
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

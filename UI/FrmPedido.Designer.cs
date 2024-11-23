@@ -196,6 +196,7 @@
             DgvListado.Size = new Size(770, 316);
             DgvListado.TabIndex = 4;
             DgvListado.CellContentClick += DgvListado_CellContentClick;
+            DgvListado.CellContentDoubleClick += DgvListado_CellContentDoubleClick;
             // 
             // Seleccionar
             // 

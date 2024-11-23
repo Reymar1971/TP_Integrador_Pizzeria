@@ -10,6 +10,7 @@ namespace UI
         PedidoBusiness pedidoBusiness = new PedidoBusiness();
         ClienteBusiness clienteBusiness = new ClienteBusiness();
         ProductoBusiness productoBusiness = new ProductoBusiness();
+        DetallePedidoBusiness detallePedidoBusiness = new DetallePedidoBusiness();
 
         public FrmPedido()
         {
@@ -270,6 +271,25 @@ namespace UI
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void MostrarDetallePedido(int pedidoId)
+        {
+            // Obtener el detalle del pedido por su ID
+            List<DetallePedido> detallePedido = detallePedidoBusiness.ObtenerDetallePedidoPorId(pedidoId);
+
+            // Crear una nueva instancia del pedido y asignar el detalle
+            Pedido pedido = new Pedido
+            {
+                IdPedido = pedidoId,
+                Detalle = detallePedido
+            };
+
+            // Crear una nueva instancia del formulario de detalles del pedido
+            FrmDetallePedido frmDetalle = new FrmDetallePedido(pedido);
+
+            // Mostrar el formulario
+            frmDetalle.ShowDialog();
         }
         #endregion
 
@@ -534,6 +554,14 @@ namespace UI
             }
         }
         #endregion
-                
+
+        private void DgvListado_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int pedidoId = Convert.ToInt32(DgvListado.Rows[e.RowIndex].Cells["IdPedido"].Value);
+                MostrarDetallePedido(pedidoId);
+            }
+        }
     }
 }
