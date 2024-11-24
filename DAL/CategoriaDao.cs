@@ -94,7 +94,36 @@ namespace DAL
                 using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
                 {
                     conn.Open();
-                    string query = "SELECT ID_CATEGORIA,NOMBRE,DESCRIPCION,ESTADO FROM categoria ";
+                    string query = "SELECT ID_CATEGORIA,NOMBRE,DESCRIPCION,ESTADO FROM categoria";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                categorias.Add(CategoriaMapper.Map(reader));
+                            }
+                        }
+                    }
+                }
+                return categorias;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        // Carga el combo de las categorias activas para el alta de productos
+        public List<Categoria> CargaCombo()
+        {
+            try
+            {
+                List<Categoria> categorias = new List<Categoria>();
+                using (SqlConnection conn = new SqlConnection(BDConfiguracion.getConectionBD()))
+                {
+                    conn.Open();
+                    string query = "SELECT ID_CATEGORIA,NOMBRE,DESCRIPCION,ESTADO FROM categoria WHERE ESTADO=1";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())

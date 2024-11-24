@@ -122,6 +122,19 @@ namespace BLL
             }
         }
 
+        //Carga combo en el alta de producto
+        public List<Categoria> CargoCombo()
+        {
+            try
+            {
+                return categoriaDao.CargaCombo();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         // Busca una categoria por su nombre o aproximacion en la base de datos
         public List<Categoria> Buscar(string text)
         {

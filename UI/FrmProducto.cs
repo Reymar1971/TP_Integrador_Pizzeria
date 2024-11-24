@@ -20,7 +20,7 @@ namespace UI
             try
             {
                 CmbCategoria.DataSource = null;
-                CmbCategoria.DataSource = categoriaBusiness.Listar();
+                CmbCategoria.DataSource = categoriaBusiness.CargoCombo();
                 CmbCategoria.ValueMember = "IdCategoria";
                 CmbCategoria.DisplayMember = "Nombre";
 
