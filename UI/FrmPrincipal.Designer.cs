@@ -111,7 +111,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FrmPrincipal";
-            Text = "Sistema de Gestion para Pizzeria";
+            Text = "Sistema de Gestión para Pizzeria";
             Load += FrmPrincipal_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
