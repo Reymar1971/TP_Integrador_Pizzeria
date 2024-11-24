@@ -12,4 +12,5 @@
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public bool Estado { get => estado; set => estado = value; }
     }
+        
 }
