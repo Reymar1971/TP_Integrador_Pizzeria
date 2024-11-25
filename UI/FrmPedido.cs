@@ -353,7 +353,7 @@ namespace UI
                 cliente.Telefono = TxtBuscar.Text;
                 clienteBusiness.Carga(cliente);
                 MessageBox.Show("Cliente cargado correctamente");
-
+                this.VerificarYActualizarCliente();                
             }
             catch (Exception ex)
             {
