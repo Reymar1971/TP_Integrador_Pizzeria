@@ -58,5 +58,12 @@ namespace UI
         {
             this.Close();
         }
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRol frmRol = new FrmRol();
+            frmRol.MdiParent = this;
+            frmRol.Show();
+        }
     }
 }
